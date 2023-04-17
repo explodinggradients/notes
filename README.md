@@ -1,6 +1,3 @@
-# Research Notes
-Research notes and extra resources for all the work at explodinggradients.com
-
 <div align="center">
   <h1>Research Notes</h1>
   <p>
@@ -8,7 +5,7 @@ Research notes and extra resources for all the work at explodinggradients.com
   </p>
   <p>
     <i>
-      Research notes and extra resources for all the work at explodinggradients.com
+      Research notes and extra resources for all the work at <a href="https://explodinggradients.com/">explodinggradients.com</a>
     </i>
   </p>
 </div>
