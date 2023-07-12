@@ -1,3 +1,5 @@
 .envrc
 retrieval/.ipynb_checkpoints
 retrieval/.chroma/index
+retrieval/wandb
+.python-version
