@@ -1,6 +1,9 @@
 .envrc
-retrieval/.ipynb_checkpoints
-retrieval/.chroma/index
-retrieval/wandb
+
+# python
+**/.ipynb_checkpoints
 .python-version
-mf-guidence/.ipynb_checkpoints
+
+# integrations
+**/.chroma/index
+**/wandb
