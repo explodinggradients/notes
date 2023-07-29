@@ -14,4 +14,9 @@ This is my notes as I'm exploring the LlamaIndex codebase. If you're looking to 
    regards
 
 ### Langsmith
-(soon...)
+**The companion (tool) I've been waiting for**
+langsmith has been a game changer for me when I'm developing and debugging LLM
+apps. 
+
+1. [Langsmith Overview](./langsmith-intro.ipynb) - Exploring all the langsmith
+   features available.
