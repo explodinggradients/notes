@@ -12,6 +12,9 @@ This is my notes as I'm exploring the LlamaIndex codebase. If you're looking to 
 3. [LLMs: chat models](./llms-chat.ipynb) - Chat Models are becoming more common
    and is cheaper too. In this notebook we'll see what langchain offers in this
    regards
+4. [Chains](./chains.ipynb) - soon!
+5. [Evaluations - Basics](./evaluations.ipynb) - A quick look into how
+   evaluations are done in langchain.
 
 ### Langsmith
 **The companion (tool) I've been waiting for**
@@ -20,3 +23,14 @@ apps.
 
 1. [Langsmith Overview](./langsmith-intro.ipynb) - Exploring all the langsmith
    features available.
+2. [QA evaluation with Langsmith](./langsmith-qa-evaluation.ipynb) - soon!
+3. [Evalution with Ragas]() - soon!
+
+
+### QA Systems
+Langchain allows you to connect your own documents too ie building a basic
+"Retrival Augmented Generation (RAG)" pipeline
+
+1. [Intro](./QA-intro.ipynb) - Overview of the main steps involved.
+2. [QA Evaluation](./qa_evaluations.ipynb) - How to evaluate RAG pipelines with
+   the available evaluation chains.
