@@ -23,7 +23,8 @@ apps.
 
 1. [Langsmith Overview](./langsmith-intro.ipynb) - Exploring all the langsmith
    features available.
-2. [QA evaluation with Langsmith](./langsmith-qa-evaluation.ipynb) - soon!
+2. [QA evaluation with Langsmith](./qa_evaluations.ipynb) - Covers how to
+   evaluate with langsmith. It pretty neat way to visualize the results.
 3. [Evalution with Ragas]() - soon!
 
 
