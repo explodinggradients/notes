@@ -1,0 +1,863 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Debugging LlamaIndex &#8212; Notes</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'LlamaIndex/debugging-llamaindex';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Notes</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    <no title>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../mf-guidence/README.html">Guidence</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mf-guidence/guidence101.html">Guidence 101</a></li>
+</ul>
+</li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Langchain/README.html">Langchain Internals</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Langchain/prompts.html">Prompts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Langchain/chains.html">Chains - Intro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Langchain/evaluations.html">Evaluations - Intro</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FLlamaIndex/debugging-llamaindex.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/LlamaIndex/debugging-llamaindex.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Debugging LlamaIndex</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Debugging LlamaIndex</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#content">Content</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tracing-your-steps-with-callbackmanager">1. <span class="xref myst">Tracing your steps with <code class="docutils literal notranslate"><span class="pre">CallbackManager</span></code></span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#furthur-explorations-with-llamadebughandler">2. <span class="xref myst">Furthur Explorations with <code class="docutils literal notranslate"><span class="pre">LlamaDebugHandler</span></code></span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-wandb-for-experiment-tracking-and-tracing">3. <span class="xref myst">Setting up wandb for experiment tracking and tracing</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Tracing your steps with <code class="docutils literal notranslate"><span class="pre">CallbackManager</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Furthur Explorations with <code class="docutils literal notranslate"><span class="pre">LlamaDebugHandler</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Setting up wandb for experiment tracking and tracing</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="debugging-llamaindex">
+<h1>Debugging LlamaIndex<a class="headerlink" href="#debugging-llamaindex" title="Permalink to this heading">#</a></h1>
+<p>I’ve been developing RAG(Retrieval Augmented Generation) apps with Llamaindex and helping develop/contributing to the main project as well. Over time I’ve been learning a few tricks here and there to helps debug the pipelines I build more effectively. This is a collection of all my tips and tricks</p>
+<section id="content">
+<h2>Content<a class="headerlink" href="#content" title="Permalink to this heading">#</a></h2>
+<section id="tracing-your-steps-with-callbackmanager">
+<h3>1. <span class="xref myst">Tracing your steps with <code class="docutils literal notranslate"><span class="pre">CallbackManager</span></code></span><a class="headerlink" href="#tracing-your-steps-with-callbackmanager" title="Permalink to this heading">#</a></h3>
+</section>
+<section id="furthur-explorations-with-llamadebughandler">
+<h3>2. <span class="xref myst">Furthur Explorations with <code class="docutils literal notranslate"><span class="pre">LlamaDebugHandler</span></code></span><a class="headerlink" href="#furthur-explorations-with-llamadebughandler" title="Permalink to this heading">#</a></h3>
+</section>
+<section id="setting-up-wandb-for-experiment-tracking-and-tracing">
+<h3>3. <span class="xref myst">Setting up wandb for experiment tracking and tracing</span><a class="headerlink" href="#setting-up-wandb-for-experiment-tracking-and-tracing" title="Permalink to this heading">#</a></h3>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>Tracing your steps with <code class="docutils literal notranslate"><span class="pre">CallbackManager</span></code><a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">CallbackManager</span></code> allows you to trace the steps llamaindex takes to generate the response and the time each step took.</p>
+<p>For this example lets compare 2 indices <code class="docutils literal notranslate"><span class="pre">ListIndex</span></code> and <code class="docutils literal notranslate"><span class="pre">VectorIndex</span></code> and see how the outputs are.</p>
+<p>but first things first, lets import everything and init a service_context that uses the callback_manager we created. Then we use <code class="docutils literal notranslate"><span class="pre">set_global_service_context</span></code> to use that service context throught.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+<span class="kn">from</span> <span class="nn">llama_index</span> <span class="kn">import</span> <span class="n">set_global_service_context</span>
+<span class="kn">from</span> <span class="nn">llama_index</span> <span class="kn">import</span> <span class="n">ListIndex</span><span class="p">,</span> <span class="n">VectorStoreIndex</span><span class="p">,</span> <span class="n">ServiceContext</span><span class="p">,</span> <span class="n">LLMPredictor</span>
+<span class="kn">from</span> <span class="nn">llama_index.callbacks</span> <span class="kn">import</span> <span class="n">CallbackManager</span><span class="p">,</span> <span class="n">LlamaDebugHandler</span><span class="p">,</span> <span class="n">CBEventType</span>
+
+<span class="n">llm_predictor</span> <span class="o">=</span> <span class="n">LLMPredictor</span><span class="p">(</span>
+    <span class="n">llm</span><span class="o">=</span><span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;gpt-3.5-turbo&#39;</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">llama_debug</span> <span class="o">=</span> <span class="n">LlamaDebugHandler</span><span class="p">(</span><span class="n">print_trace_on_end</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">callback_manager</span> <span class="o">=</span> <span class="n">CallbackManager</span><span class="p">([</span><span class="n">llama_debug</span><span class="p">])</span>
+<span class="n">service_context</span> <span class="o">=</span> <span class="n">ServiceContext</span><span class="o">.</span><span class="n">from_defaults</span><span class="p">(</span>
+    <span class="n">callback_manager</span><span class="o">=</span><span class="n">callback_manager</span><span class="p">,</span> 
+    <span class="n">llm_predictor</span><span class="o">=</span><span class="n">llm_predictor</span>
+<span class="p">)</span>
+
+<span class="n">set_global_service_context</span><span class="p">(</span><span class="n">service_context</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load the data</span>
+<span class="kn">from</span> <span class="nn">llama_index</span> <span class="kn">import</span> <span class="n">SimpleDirectoryReader</span>
+
+<span class="n">docs</span> <span class="o">=</span> <span class="n">SimpleDirectoryReader</span><span class="p">(</span><span class="s2">&quot;./what_i_worked_on_pg/&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now lets create the first index</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vector_index</span> <span class="o">=</span> <span class="n">VectorStoreIndex</span><span class="o">.</span><span class="n">from_documents</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>**********
+Trace: index_construction
+    |_node_parsing -&gt;  0.124317 seconds
+      |_chunking -&gt;  0.122693 seconds
+    |_embedding -&gt;  1.381548 seconds
+    |_embedding -&gt;  0.986437 seconds
+**********
+</pre></div>
+</div>
+</div>
+</div>
+<p>and vola! you can see the traces in actions. Here you can see the different steps the index construction took. You can see that the LlamaIndex made 2 calls to the embedding endpoint to create the embeddings for the chunks.</p>
+<p>Now lets try <code class="docutils literal notranslate"><span class="pre">ListIndex</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list_index</span> <span class="o">=</span> <span class="n">ListIndex</span><span class="o">.</span><span class="n">from_documents</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>**********
+Trace: index_construction
+    |_node_parsing -&gt;  0.130536 seconds
+      |_chunking -&gt;  0.128729 seconds
+**********
+</pre></div>
+</div>
+</div>
+</div>
+<p>And we have a different output. If you know <code class="docutils literal notranslate"><span class="pre">ListIndexes</span></code> you know that they don’t have embeddings instead just chunk the docs and store.</p>
+<p>That was index creation but how about query time? Lets find out</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># util func to help me :)</span>
+<span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="n">question</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+    <span class="n">qe</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">as_query_engine</span><span class="p">()</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">r</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">query</span><span class="p">(</span><span class="s2">&quot;what did the author do growing up?&quot;</span><span class="p">,</span> <span class="n">vector_index</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>**********
+Trace: query
+    |_query -&gt;  2.390294 seconds
+      |_retrieve -&gt;  0.33361 seconds
+        |_embedding -&gt;  0.329092 seconds
+      |_synthesize -&gt;  2.05655 seconds
+        |_llm -&gt;  2.031409 seconds
+**********
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here you can see the steps LlamaIndex took.</p>
+<p>Lets try something a bit more complicated, like our <code class="docutils literal notranslate"><span class="pre">ListIndex</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">query</span><span class="p">(</span><span class="s2">&quot;what did the author do growing up?&quot;</span><span class="p">,</span> <span class="n">list_index</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>**********
+Trace: query
+    |_query -&gt;  100.628079 seconds
+      |_retrieve -&gt;  0.003366 seconds
+      |_synthesize -&gt;  100.624557 seconds
+        |_llm -&gt;  4.596029 seconds
+        |_llm -&gt;  5.08475 seconds
+        |_llm -&gt;  6.206133 seconds
+        |_llm -&gt;  10.300521 seconds
+        |_llm -&gt;  8.189844 seconds
+        |_llm -&gt;  9.047571 seconds
+        |_llm -&gt;  11.563737 seconds
+        |_llm -&gt;  10.239132 seconds
+        |_llm -&gt;  15.381177 seconds
+        |_llm -&gt;  19.77576 seconds
+**********
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can imagine this is very neat tool to get a better understanding of what are the steps that happening internally with LlamaIndex. Especially usefull when debugging, something I’ve turned to time and time again when building complex indexes with LlamaIndex.</p>
+<p>but what if you want a bit more info?</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id2">
+<h1>Furthur Explorations with <code class="docutils literal notranslate"><span class="pre">LlamaDebugHandler</span></code><a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h1>
+<blockquote>
+<div><p>Note: The <code class="docutils literal notranslate"><span class="pre">LlamaDebugHandler</span></code> is in beta and subject to change. So these examples might get outdated check the <a class="reference external" href="https://gpt-index.readthedocs.io/en/latest/examples/callbacks/LlamaDebugHandler.html">docs</a> and <span class="xref myst">code</span> for up-to-date info.</p>
+</div></blockquote>
+<p>LlamaIndex uses callbacks to log the events that are happening. These callbacks are exposed via the <code class="docutils literal notranslate"><span class="pre">LlamaDebugHandler</span></code> for debugging purposes. If you can parse these, it is much easier when you are working with LlamaIndex to know exactly what is happening.</p>
+<p>the <code class="docutils literal notranslate"><span class="pre">CallbackManager</span></code> logs many different events. Here is the full list.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">CHUNKING</span> <span class="o">=</span> <span class="s2">&quot;chunking&quot;</span>
+<span class="n">NODE_PARSING</span> <span class="o">=</span> <span class="s2">&quot;node_parsing&quot;</span>
+<span class="n">EMBEDDING</span> <span class="o">=</span> <span class="s2">&quot;embedding&quot;</span>
+<span class="n">LLM</span> <span class="o">=</span> <span class="s2">&quot;llm&quot;</span>
+<span class="n">QUERY</span> <span class="o">=</span> <span class="s2">&quot;query&quot;</span>
+<span class="n">RETRIEVE</span> <span class="o">=</span> <span class="s2">&quot;retrieve&quot;</span>
+<span class="n">SYNTHESIZE</span> <span class="o">=</span> <span class="s2">&quot;synthesize&quot;</span>
+<span class="n">TREE</span> <span class="o">=</span> <span class="s2">&quot;tree&quot;</span>
+<span class="n">SUB_QUESTIONS</span> <span class="o">=</span> <span class="s2">&quot;sub_questions&quot;</span>
+</pre></div>
+</div>
+<p>They also have different payload types which are listed here</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">DOCUMENTS</span> <span class="o">=</span> <span class="s2">&quot;documents&quot;</span>  <span class="c1"># list of documents before parsing</span>
+<span class="n">CHUNKS</span> <span class="o">=</span> <span class="s2">&quot;chunks&quot;</span>  <span class="c1"># list of text chunks</span>
+<span class="n">NODES</span> <span class="o">=</span> <span class="s2">&quot;nodes&quot;</span>  <span class="c1"># list of nodes</span>
+<span class="n">PROMPT</span> <span class="o">=</span> <span class="s2">&quot;formatted_prompt&quot;</span>  <span class="c1"># formatted prompt sent to LLM</span>
+<span class="n">RESPONSE</span> <span class="o">=</span> <span class="s2">&quot;response&quot;</span>  <span class="c1"># response from LLM</span>
+<span class="n">TEMPLATE</span> <span class="o">=</span> <span class="s2">&quot;template&quot;</span>  <span class="c1"># template used in LLM call</span>
+<span class="n">QUERY_STR</span> <span class="o">=</span> <span class="s2">&quot;query_str&quot;</span>  <span class="c1"># query used for query engine</span>
+<span class="n">SUB_QUESTIONS</span> <span class="o">=</span> <span class="s2">&quot;sub_questions&quot;</span>  <span class="c1"># list of sub question &amp; answer pairs</span>
+</pre></div>
+</div>
+<p>Now lets see this in action.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># clear the events uptill now</span>
+<span class="n">llama_debug</span><span class="o">.</span><span class="n">flush_event_logs</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">query</span><span class="p">(</span><span class="s2">&quot;what did the author do growing up?&quot;</span><span class="p">,</span> <span class="n">list_index</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">llama_index.callbacks</span> <span class="kn">import</span> <span class="n">CBEventType</span>
+
+<span class="n">es</span> <span class="o">=</span> <span class="n">llama_debug</span><span class="o">.</span><span class="n">get_events</span><span class="p">()</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">es</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>26
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">es</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">event_type</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CBEventType.QUERY
+CBEventType.RETRIEVE
+CBEventType.RETRIEVE
+CBEventType.SYNTHESIZE
+CBEventType.LLM
+CBEventType.LLM
+CBEventType.LLM
+CBEventType.LLM
+CBEventType.LLM
+CBEventType.LLM
+CBEventType.LLM
+CBEventType.LLM
+CBEventType.LLM
+CBEventType.LLM
+CBEventType.LLM
+CBEventType.LLM
+CBEventType.LLM
+CBEventType.LLM
+CBEventType.LLM
+CBEventType.LLM
+CBEventType.LLM
+CBEventType.LLM
+CBEventType.LLM
+CBEventType.LLM
+CBEventType.SYNTHESIZE
+CBEventType.QUERY
+</pre></div>
+</div>
+</div>
+</div>
+<p>this represents one List Index call and can be quite helpful when debugging. If you want to see all llms call made run <code class="docutils literal notranslate"><span class="pre">get_llm_inputs_outputs()</span></code> to get the LLM event pairs</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">es</span> <span class="o">=</span> <span class="n">llama_debug</span><span class="o">.</span><span class="n">get_llm_inputs_outputs</span><span class="p">()</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">es</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+</pre></div>
+</div>
+</div>
+</div>
+<p>To view the events sequentially you can access the <code class="docutils literal notranslate"><span class="pre">sequential_events</span></code> property.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">e</span> <span class="o">=</span> <span class="n">llama_debug</span><span class="o">.</span><span class="n">sequential_events</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>26
+</pre></div>
+</div>
+</div>
+</div>
+<p>But honestly debugging like this is very hard and non-intutive. We need easier ways to do this. We’ll cover those next.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id3">
+<h1>Setting up wandb for experiment tracking and tracing<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h1>
+<p>(soon)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">llama_index.callbacks</span> <span class="kn">import</span> <span class="n">WandbCallbackHandler</span>
+
+<span class="n">wandb_callback</span> <span class="o">=</span> <span class="n">WandbCallbackHandler</span><span class="p">(</span><span class="n">run_args</span><span class="o">=</span><span class="p">{</span>
+    <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="s2">&quot;LlamaIndex&quot;</span><span class="p">,</span>
+<span class="p">})</span>
+
+<span class="n">callback_manager</span> <span class="o">=</span> <span class="n">CallbackManager</span><span class="p">([</span><span class="n">llama_debug</span><span class="p">,</span> <span class="n">wandb_callback</span><span class="p">])</span>
+<span class="n">service_context</span> <span class="o">=</span> <span class="n">ServiceContext</span><span class="o">.</span><span class="n">from_defaults</span><span class="p">(</span>
+    <span class="n">callback_manager</span><span class="o">=</span><span class="n">callback_manager</span><span class="p">,</span> 
+    <span class="n">llm_predictor</span><span class="o">=</span><span class="n">llm_predictor</span>
+<span class="p">)</span>
+
+<span class="n">set_global_service_context</span><span class="p">(</span><span class="n">service_context</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vector_index</span> <span class="o">=</span> <span class="n">VectorStoreIndex</span><span class="o">.</span><span class="n">from_documents</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>**********
+Trace: index_construction
+    |_embedding -&gt;  1.630853 seconds
+    |_embedding -&gt;  1.937581 seconds
+**********
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Blue">wandb</span>: Logged trace tree to W&amp;B.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wandb_callback</span><span class="o">.</span><span class="n">persist_index</span><span class="p">(</span><span class="n">vector_index</span><span class="p">,</span> <span class="n">index_name</span><span class="o">=</span><span class="s2">&quot;vector_index&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Blue">wandb</span>: Adding directory to artifact (/home/jjmachan/jjmachan/explodinggradients/notes/retrieval/wandb/run-20230622_152138-hhq061lj/files/storage)... Done. 0.0s
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">query</span><span class="p">(</span><span class="s2">&quot;what did the author do growing up?&quot;</span><span class="p">,</span> <span class="n">vector_index</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>**********
+Trace: query
+    |_query -&gt;  2.01595 seconds
+      |_retrieve -&gt;  0.463314 seconds
+        |_embedding -&gt;  0.457025 seconds
+      |_synthesize -&gt;  1.552477 seconds
+        |_llm -&gt;  1.534402 seconds
+**********
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Blue">wandb</span>: Logged trace tree to W&amp;B.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./LlamaIndex"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Debugging LlamaIndex</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#content">Content</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tracing-your-steps-with-callbackmanager">1. <span class="xref myst">Tracing your steps with <code class="docutils literal notranslate"><span class="pre">CallbackManager</span></code></span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#furthur-explorations-with-llamadebughandler">2. <span class="xref myst">Furthur Explorations with <code class="docutils literal notranslate"><span class="pre">LlamaDebugHandler</span></code></span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-wandb-for-experiment-tracking-and-tracing">3. <span class="xref myst">Setting up wandb for experiment tracking and tracing</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Tracing your steps with <code class="docutils literal notranslate"><span class="pre">CallbackManager</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Furthur Explorations with <code class="docutils literal notranslate"><span class="pre">LlamaDebugHandler</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Setting up wandb for experiment tracking and tracing</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By ExplodingGradients
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

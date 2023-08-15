@@ -1,0 +1,846 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Evaluating RAG Systems &#8212; Notes</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Langchain/qa_evaluations';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Notes</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    <no title>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../mf-guidence/README.html">Guidence</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mf-guidence/guidence101.html">Guidence 101</a></li>
+</ul>
+</li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="README.html">Langchain Internals</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="prompts.html">Prompts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chains.html">Chains - Intro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="evaluations.html">Evaluations - Intro</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FLangchain/qa_evaluations.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Langchain/qa_evaluations.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Evaluating RAG Systems</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-a-rag-pipeline">Build a RAG pipeline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coldstart-eval-data">Coldstart eval data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-evaluation-chains">Run Evaluation chains</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-qa-with-langsmith">Evaluating QA with langsmith</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-dataset">1. Create a dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-qa-chain-to-evaluate">2. Define the QA chain to evaluate</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate">3. Evaluate</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="evaluating-rag-systems">
+<h1>Evaluating RAG Systems<a class="headerlink" href="#evaluating-rag-systems" title="Permalink to this heading">#</a></h1>
+<p>Langchain has the <a class="reference external" href="https://python.langchain.com/docs/modules/data_connection/">data connection</a> module which helps you connect your own data with LLMs and build Retrieval Augmented Generation pipelines. We will be testing out</p>
+<ol class="arabic simple">
+<li><p>QA</p></li>
+<li><p>COT_QA</p></li>
+<li><p>CONTEXT_QA</p></li>
+</ol>
+<p>Lets see how we can evaluate those but first lets build a QA system to test.</p>
+<section id="build-a-rag-pipeline">
+<h2>Build a RAG pipeline<a class="headerlink" href="#build-a-rag-pipeline" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.document_loaders</span> <span class="kn">import</span> <span class="n">TextLoader</span>
+<span class="kn">from</span> <span class="nn">langchain.indexes</span> <span class="kn">import</span> <span class="n">VectorstoreIndexCreator</span>
+
+<span class="n">loader</span> <span class="o">=</span> <span class="n">TextLoader</span><span class="p">(</span><span class="s2">&quot;nyc_text.txt&quot;</span><span class="p">)</span>
+<span class="n">index</span> <span class="o">=</span> <span class="n">VectorstoreIndexCreator</span><span class="p">()</span><span class="o">.</span><span class="n">from_loaders</span><span class="p">([</span><span class="n">loader</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">question</span> <span class="o">=</span> <span class="s2">&quot;How did New York City get its name?&quot;</span>
+<span class="n">index</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39; New York City was named after King Charles II of England, who granted the lands to his brother, the Duke of York.&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">RetrievalQA</span>
+<span class="kn">from</span> <span class="nn">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">()</span>
+<span class="n">qa_chain</span> <span class="o">=</span> <span class="n">RetrievalQA</span><span class="o">.</span><span class="n">from_chain_type</span><span class="p">(</span>
+    <span class="n">llm</span><span class="p">,</span>
+    <span class="n">retriever</span><span class="o">=</span><span class="n">index</span><span class="o">.</span><span class="n">vectorstore</span><span class="o">.</span><span class="n">as_retriever</span><span class="p">(),</span>
+    <span class="n">return_source_documents</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">qa_chain</span><span class="p">({</span><span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;source_documents&#39;</span><span class="p">]))</span>
+<span class="n">result</span><span class="p">[</span><span class="s1">&#39;source_documents&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Document(page_content=&quot;== Etymology ==\n\nIn 1664, New York was named in honor of the Duke of York, who would become King James II of England. James&#39;s elder brother, King Charles II, appointed the Duke as proprietor of the former territory of New Netherland, including the city of New Amsterdam, when England seized it from Dutch control.\n\n\n== History ==&quot;, metadata={&#39;source&#39;: &#39;nyc_text.txt&#39;})
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;query&#39;: &#39;How did New York City get its name?&#39;,
+ &#39;result&#39;: &#39;New York City got its name in 1664 when it was renamed by the British after King Charles II granted the lands to his brother, the Duke of York. It was originally settled by the Dutch and named New Amsterdam in 1626. After coming under British control, the city was renamed New York in honor of the Duke of York, who would later become King James II of England.&#39;,
+ &#39;source_documents&#39;: [Document(page_content=&quot;== Etymology ==\n\nIn 1664, New York was named in honor of the Duke of York, who would become King James II of England. James&#39;s elder brother, King Charles II, appointed the Duke as proprietor of the former territory of New Netherland, including the city of New Amsterdam, when England seized it from Dutch control.\n\n\n== History ==&quot;, metadata={&#39;source&#39;: &#39;nyc_text.txt&#39;}),
+  Document(page_content=&quot;During the Wisconsin glaciation, 75,000 to 11,000 years ago, the New York City area was situated at the edge of a large ice sheet over 2,000 feet (610 m) in depth. The erosive forward movement of the ice (and its subsequent retreat) contributed to the separation of what is now Long Island and Staten Island. That action also left bedrock at a relatively shallow depth, providing a solid foundation for most of Manhattan&#39;s skyscrapers.New York City is situated in the northeastern United States, in southeastern New York State, approximately halfway between Washington, D.C. and Boston. The location at the mouth of the Hudson River, which feeds into a naturally sheltered harbor and then into the Atlantic Ocean, has helped the city grow in significance as a trading port. Most of New York City is built on the three islands of Long Island, Manhattan, and Staten Island.&quot;, metadata={&#39;source&#39;: &#39;nyc_text.txt&#39;}),
+  Document(page_content=&#39;The city and its metropolitan area constitute the premier gateway for legal immigration to the United States. As many as 800 languages are spoken in New York, making it the most linguistically diverse city in the world. New York City is home to more than 3.2 million residents born outside the U.S., the largest foreign-born population of any city in the world as of 2016.New York City traces its origins to a trading post founded on the southern tip of Manhattan Island by Dutch colonists in approximately 1624. The settlement was named New Amsterdam (Dutch: Nieuw Amsterdam) in 1626 and was chartered as a city in 1653. The city came under British control in 1664 and was renamed New York after King Charles II of England granted the lands to his brother, the Duke of York. The city was regained by the Dutch in July 1673 and was renamed New Orange for one year and three months; the city has been continuously named New York since November 1674. New York City was the capital of the United States&#39;, metadata={&#39;source&#39;: &#39;nyc_text.txt&#39;}),
+  Document(page_content=&quot;Despite New York&#39;s heavy reliance on its vast public transit system, streets are a defining feature of the city. The Commissioners&#39; Plan of 1811 greatly influenced the city&#39;s physical development. Several of the city&#39;s streets and avenues, including Broadway, Wall Street, Madison Avenue, and Seventh Avenue are also used as metonyms for national industries there: the theater, finance, advertising, and fashion organizations, respectively.&quot;, metadata={&#39;source&#39;: &#39;nyc_text.txt&#39;})]}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="coldstart-eval-data">
+<h2>Coldstart eval data<a class="headerlink" href="#coldstart-eval-data" title="Permalink to this heading">#</a></h2>
+<p>We don’t have any evaluation data to run the evaluation against so lets synthesis some. We need questions and Answer for this and we are going to use <a class="reference external" href="https://github.com/jerryjliu/llama_index">LlamaIndex</a> for this.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">llama_index</span> <span class="kn">import</span> <span class="n">VectorStoreIndex</span><span class="p">,</span> <span class="n">SimpleDirectoryReader</span><span class="p">,</span> <span class="n">Document</span>
+<span class="kn">from</span> <span class="nn">llama_index.evaluation</span> <span class="kn">import</span> <span class="n">DatasetGenerator</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./nyc_text.txt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">docs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Document</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())]</span>
+    
+<span class="n">question_generator</span> <span class="o">=</span> <span class="n">DatasetGenerator</span><span class="o">.</span><span class="n">from_documents</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
+<span class="n">eval_questions</span> <span class="o">=</span> <span class="n">question_generator</span><span class="o">.</span><span class="n">generate_questions_from_nodes</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">eval_questions</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;What is the population of New York City as of 2020?&#39;,
+ &#39;Which borough of New York City has the highest population?&#39;,
+ &#39;What is the economic significance of New York City?&#39;,
+ &#39;How did New York City get its name?&#39;,
+ &#39;What is the significance of the Statue of Liberty in New York City?&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="run-evaluation-chains">
+<h2>Run Evaluation chains<a class="headerlink" href="#run-evaluation-chains" title="Permalink to this heading">#</a></h2>
+<p>Lets start of with</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">EvaluatorType.CONTEXT_QA</span></code> which evaluates the generated answer to check if it is factually correct with the context.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">examples</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">eval_questions</span><span class="p">:</span>
+    <span class="n">example</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="n">q</span><span class="p">}</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">qa_chain</span><span class="p">(</span><span class="n">example</span><span class="p">)</span>
+    <span class="n">example</span><span class="p">[</span><span class="s2">&quot;context&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">c</span><span class="o">.</span><span class="n">page_content</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;source_documents&quot;</span><span class="p">]])</span>
+    
+    <span class="n">examples</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">example</span><span class="p">)</span>
+    <span class="n">predictions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.evaluation</span> <span class="kn">import</span> <span class="n">load_evaluator</span><span class="p">,</span> <span class="n">EvaluatorType</span>
+
+<span class="n">context_qa_eval</span> <span class="o">=</span> <span class="n">load_evaluator</span><span class="p">(</span><span class="n">EvaluatorType</span><span class="o">.</span><span class="n">CONTEXT_QA</span><span class="p">)</span>
+
+<span class="c1"># evaluation</span>
+<span class="n">context_qa_eval</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">examples</span><span class="p">,</span> <span class="n">predictions</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;text&#39;: &#39;CORRECT&#39;},
+ {&#39;text&#39;: &#39;CORRECT&#39;},
+ {&#39;text&#39;: &#39;CORRECT&#39;},
+ {&#39;text&#39;: &#39;CORRECT&#39;},
+ {&#39;text&#39;: &#39;CORRECT&#39;}]
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><code class="docutils literal notranslate"><span class="pre">EvaluatorType.COT_QA</span></code> which is the same as <code class="docutils literal notranslate"><span class="pre">EvaluatorType.CONTEXT_QA</span></code> but uses Chain of Thought (COT) reasoning for better answer.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cot_qa_eval</span> <span class="o">=</span> <span class="n">load_evaluator</span><span class="p">(</span><span class="n">EvaluatorType</span><span class="o">.</span><span class="n">COT_QA</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">cot_qa_eval</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">examples</span><span class="p">,</span> <span class="n">predictions</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;text&#39;: &quot;The context states that the population of New York City in 2020 is 8,804,190. The student&#39;s answer matches this information exactly. Therefore, the student&#39;s answer is correct.\nGRADE: CORRECT&quot;},
+ {&#39;text&#39;: &#39;The context mentions that &quot;Brooklyn (Kings County), on the western tip of Long Island, is the city\&#39;s most populous borough.&quot; This statement directly aligns with the student\&#39;s answer, which states that Brooklyn has the highest population in New York City. Therefore, the student\&#39;s answer is correct.\nGRADE: CORRECT&#39;},
+ {&#39;text&#39;: &quot;The student&#39;s answer correctly identifies New York City as the headquarters for the U.S. financial industry, including Wall Street, and mentions the presence of large financial companies and startups. The student also correctly identifies New York City as a global hub for business and commerce, attracting capital, business, and tourists from around the world. The student correctly lists several industries that are centered in New York City, such as banking and finance, healthcare and life sciences, retailing, world trade, transportation, tourism, media, advertising, fashion, and the arts. The student correctly mentions the significant role of the Port of New York and New Jersey in handling maritime cargo. The student also correctly identifies the fashion industry as a significant part of New York City&#39;s economy, with a large number of employees and substantial annual wages. The student&#39;s answer is in line with the context provided and does not contain any conflicting statements.\nGRADE: CORRECT&quot;},
+ {&#39;text&#39;: &quot;The student&#39;s answer matches the information provided in the context. The context states that the city was originally named New Amsterdam by Dutch colonists, which the student correctly identified. The context also states that the city was renamed New York in 1664 after King Charles II granted the lands to his brother, the Duke of York, which the student also correctly identified. The student&#39;s answer also correctly states that the city has been continuously named New York since November 1674, which is also stated in the context. Therefore, the student&#39;s answer is factually accurate.\nGRADE: CORRECT&quot;},
+ {&#39;text&#39;: &quot;The student&#39;s answer correctly identifies the Statue of Liberty as a symbol of the United States and its ideals of liberty and peace, which is stated in the context. The student also correctly states that the statue greeted millions of immigrants as they came to the U.S. by ship in the late 19th and early 20th centuries, which is also mentioned in the context. The student&#39;s claim that the statue represents freedom, cultural diversity, and the welcoming of immigrants to America is supported by the context&#39;s mention of New York City as a symbol of freedom and cultural diversity. The student&#39;s statement that the Statue of Liberty is one of the most iconic landmarks in New York City and serves as a reminder of the city&#39;s historical and cultural significance is a reasonable interpretation of the context&#39;s information about the city&#39;s landmarks and history. Therefore, the student&#39;s answer is factually accurate based on the context.\nGRADE: CORRECT&quot;}]
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><code class="docutils literal notranslate"><span class="pre">EvaluatorType.QA</span></code> which compares the answer generated and the ground truth to check if there are any factual inconsistancies.</p></li>
+</ol>
+<p>to run this we need ground truth answers, for this we are going to use llamaIndex as the source of truth (don’t do this in prod).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create vector index</span>
+<span class="n">vector_index</span> <span class="o">=</span> <span class="n">VectorStoreIndex</span><span class="o">.</span><span class="n">from_documents</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
+<span class="n">qe</span> <span class="o">=</span> <span class="n">vector_index</span><span class="o">.</span><span class="n">as_query_engine</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># generate answer in examples</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">eval_questions</span><span class="p">):</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="n">examples</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;answer&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">response</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load and evaluate</span>
+<span class="n">qa_eval</span> <span class="o">=</span> <span class="n">load_evaluator</span><span class="p">(</span><span class="n">EvaluatorType</span><span class="o">.</span><span class="n">QA</span><span class="p">)</span>
+<span class="n">qa_eval</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">examples</span><span class="p">,</span> <span class="n">predictions</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;results&#39;: &#39;CORRECT&#39;},
+ {&#39;results&#39;: &#39;INCORRECT&#39;},
+ {&#39;results&#39;: &#39;CORRECT&#39;},
+ {&#39;results&#39;: &#39;CORRECT&#39;},
+ {&#39;results&#39;: &#39;CORRECT&#39;}]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="evaluating-qa-with-langsmith">
+<h2>Evaluating QA with langsmith<a class="headerlink" href="#evaluating-qa-with-langsmith" title="Permalink to this heading">#</a></h2>
+<p>Lets try evaluating qa systems with langsmith. Checkout the langsmith intro notebook to know more about setting langsmith up.</p>
+<section id="create-a-dataset">
+<h3>1. Create a dataset<a class="headerlink" href="#create-a-dataset" title="Permalink to this heading">#</a></h3>
+<p>lets create and upload the <code class="docutils literal notranslate"><span class="pre">examples</span></code> as dataset for evaluations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langsmith</span> <span class="kn">import</span> <span class="n">Client</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+
+<span class="n">dataset_name</span> <span class="o">=</span> <span class="s2">&quot;NYC test&quot;</span>
+
+<span class="n">dataset_list</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">list_datasets</span><span class="p">()</span>
+<span class="n">dataset_exists</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dataset_list</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">dataset_name</span><span class="p">:</span>
+        <span class="n">dataset_exists</span><span class="o">=</span><span class="kc">True</span>
+        <span class="n">dataset</span> <span class="o">=</span> <span class="n">d</span>
+        
+<span class="k">if</span> <span class="ow">not</span> <span class="n">dataset_exists</span><span class="p">:</span>
+    <span class="n">dataset</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span>
+        <span class="n">dataset_name</span><span class="o">=</span><span class="n">dataset_name</span>
+    <span class="p">)</span>
+    
+<span class="n">dataset</span><span class="o">.</span><span class="n">id</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>UUID(&#39;754c4ec6-14ec-4d4c-b955-4a8b4ac2e4c5&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">e</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;query&#39;: &#39;What is the significance of the Statue of Liberty in New York City?&#39;,
+ &#39;context&#39;: &#39;from 1785 until 1790, and has been the largest U.S. city since 1790. The Statue of Liberty greeted millions of immigrants as they came to the U.S. by ship in the late 19th and early 20th centuries, and is a symbol of the U.S. and its ideals of liberty and peace. In the 21st century, New York City has emerged as a global node of creativity, entrepreneurship, and as a symbol of freedom and cultural diversity. The New York Times has won the most Pulitzer Prizes for journalism and remains the U.S. media\&#39;s &quot;newspaper of record&quot;. In 2019, New York City was voted the greatest city in the world in a survey of over 30,000 people from 48 cities worldwide, citing its cultural diversity.Many districts and monuments in New York City are major landmarks, including three of the world\&#39;s ten most visited tourist attractions in 2013. A record 66.6 million tourists visited New York City in 2019. Times Square is the brightly illuminated hub of the Broadway Theater District, one of the world\&#39;s busiest\nThe Statue of Liberty National Monument and Ellis Island Immigration Museum are managed by the National Park Service and are in both New York and New Jersey. They are joined in the harbor by Governors Island National Monument. Historic sites under federal management on Manhattan Island include Stonewall National Monument; Castle Clinton National Monument; Federal Hall National Memorial; Theodore Roosevelt Birthplace National Historic Site; General Grant National Memorial (Grant\&#39;s Tomb); African Burial Ground National Monument; and Hamilton Grange National Memorial. Hundreds of properties are listed on the National Register of Historic Places or as a National Historic Landmark.\nThe majority of the most high-profile tourist destinations to the city are situated in Manhattan. These include Times Square; Broadway theater productions; the Empire State Building; the Statue of Liberty; Ellis Island; the United Nations headquarters; the World Trade Center (including the National September 11 Memorial &amp; Museum and One World Trade Center); the art museums along Museum Mile; green spaces such as Central Park, Washington Square Park, the High Line, and the medieval gardens of The Cloisters; the Stonewall Inn; Rockefeller Center; ethnic enclaves including the Manhattan Chinatown, Koreatown, Curry Hill, Harlem, Spanish Harlem, Little Italy, and Little Australia; luxury shopping along Fifth and Madison Avenues; and events such as the Halloween Parade in Greenwich Village; the Brooklyn Bridge (shared with Brooklyn); the Macy\&#39;s Thanksgiving Day Parade; the lighting of the Rockefeller Center Christmas Tree; the St. Patrick\&#39;s Day Parade; seasonal activities such as ice\nTourism is a vital industry for New York City, and NYC &amp; Company represents the city\&#39;s official bureau of tourism. New York has witnessed a growing combined volume of international and domestic tourists, reflecting over 60 million visitors to the city per year, the world\&#39;s busiest tourist destination. Approximately 12 million visitors to New York City have been from outside the United States, with the highest numbers from the United Kingdom, Canada, Brazil, and China. Multiple sources have called New York the most photographed city in the world.I Love New York (stylized I ❤ NY) is both a logo and a song that are the basis of an advertising campaign and have been used since 1977 to promote tourism in New York City, and later to promote New York State as well. The trademarked logo, owned by New York State Empire State Development, appears in souvenir shops and brochures throughout the city and state, some licensed, many not. The song is the state song of New York.&#39;,
+ &#39;answer&#39;: &#39;\nThe Statue of Liberty is an iconic symbol of freedom and democracy in the United States. It is located in New York Harbor and has become a symbol of the city and a welcoming sight for immigrants arriving in the United States. The Statue of Liberty was a gift from France to the United States in 1886 and is a reminder of the friendship between the two countries. It is also a reminder of the ideals of freedom and democracy that the United States stands for.&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># add examples to the dataset</span>
+<span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">examples</span><span class="p">:</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">create_example</span><span class="p">(</span>
+        <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="n">e</span><span class="p">[</span><span class="s2">&quot;query&quot;</span><span class="p">]},</span>
+        <span class="n">outputs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;answer&quot;</span><span class="p">:</span> <span class="n">e</span><span class="p">[</span><span class="s2">&quot;answer&quot;</span><span class="p">]},</span>
+        <span class="n">dataset_id</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">id</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="define-the-qa-chain-to-evaluate">
+<h3>2. Define the QA chain to evaluate<a class="headerlink" href="#define-the-qa-chain-to-evaluate" title="Permalink to this heading">#</a></h3>
+<p>In order to evaluate each example individually, langsmith requries you to pass in a factory function that creates the QA chain to evaluate. This is especially important if the QA chains contain memory or other stateful variables wrapped in it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_qa_chain</span><span class="p">():</span>
+    <span class="n">qa_chain</span> <span class="o">=</span> <span class="n">RetrievalQA</span><span class="o">.</span><span class="n">from_chain_type</span><span class="p">(</span>
+        <span class="n">llm</span><span class="p">,</span>
+        <span class="n">retriever</span><span class="o">=</span><span class="n">index</span><span class="o">.</span><span class="n">vectorstore</span><span class="o">.</span><span class="n">as_retriever</span><span class="p">(),</span>
+        <span class="n">return_source_documents</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">qa_chain</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="evaluate">
+<h3>3. Evaluate<a class="headerlink" href="#evaluate" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.smith</span> <span class="kn">import</span> <span class="n">RunEvalConfig</span><span class="p">,</span> <span class="n">run_on_dataset</span>
+
+<span class="n">eval_config</span> <span class="o">=</span> <span class="n">RunEvalConfig</span><span class="p">(</span>
+    <span class="n">evaluators</span><span class="o">=</span><span class="p">[</span>
+      <span class="s2">&quot;qa&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;cot_qa&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;context_qa&quot;</span><span class="p">,</span>
+  <span class="p">],</span>
+    <span class="n">reference_key</span> <span class="o">=</span> <span class="s2">&quot;answer&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">run_on_dataset</span><span class="p">(</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
+    <span class="n">dataset_name</span><span class="o">=</span><span class="n">dataset_name</span><span class="p">,</span>
+    <span class="n">llm_or_chain_factory</span><span class="o">=</span><span class="n">create_qa_chain</span><span class="p">,</span>
+    <span class="n">evaluation</span><span class="o">=</span><span class="n">eval_config</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>View the evaluation results for project &#39;2023-08-01-23-47-46-RetrievalQA&#39; at:
+https://smith.langchain.com/projects/p/8856c6e9-98c5-47fc-9319-d72942a9af5b?eval=true
+5 processed
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Retrying langchain.chat_models.openai.ChatOpenAI.completion_with_retry.&lt;locals&gt;._completion_with_retry in 1.0 seconds as it raised ServiceUnavailableError: The server is overloaded or not ready yet..
+Retrying langchain.chat_models.openai.ChatOpenAI.completion_with_retry.&lt;locals&gt;._completion_with_retry in 1.0 seconds as it raised ServiceUnavailableError: The server is overloaded or not ready yet..
+Retrying langchain.chat_models.openai.ChatOpenAI.completion_with_retry.&lt;locals&gt;._completion_with_retry in 1.0 seconds as it raised ServiceUnavailableError: The server is overloaded or not ready yet..
+Retrying langchain.chat_models.openai.ChatOpenAI.completion_with_retry.&lt;locals&gt;._completion_with_retry in 1.0 seconds as it raised ServiceUnavailableError: The server is overloaded or not ready yet..
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;project_name&#39;: &#39;2023-08-01-23-47-46-RetrievalQA&#39;,
+ &#39;results&#39;: {&#39;6ddbfe30-309c-401e-8a6b-e17f091cfa1b&#39;: [&#39;The Statue of Liberty in New York City is significant as a symbol of the United States and its ideals of liberty and peace. It greeted millions of immigrants as they arrived in the U.S. by ship in the late 19th and early 20th centuries, representing the hope for a new life and freedom. It has since become an iconic landmark and a symbol of cultural diversity and freedom.&#39;],
+  &#39;8d0bf6f3-096b-4092-b2e9-cacc0b5f21de&#39;: [&#39;New York City was named in honor of the Duke of York, who later became King James II of England. In 1664, King Charles II appointed the Duke as proprietor of the former territory of New Netherland, which included the city of New Amsterdam (now New York City), when England seized it from Dutch control. The city was then renamed New York after the Duke of York.&#39;],
+  &#39;b3704607-ed11-4da5-bc01-3788e58e28c0&#39;: [&quot;New York City has significant economic significance in several sectors. It is a major hub for the U.S. financial industry, with Wall Street serving as the headquarters for many large financial companies. The city&#39;s securities industry is the largest segment of its financial sector. Additionally, New York City is a global center for business and commerce, attracting capital, business, and tourists from around the world. It is a leading city in industries such as banking and finance, healthcare and life sciences, retailing, world trade, transportation, tourism, real estate, media, advertising, fashion, and the arts. The city&#39;s ports, particularly the Port of New York and New Jersey, play a crucial role in international trade. New York City is also home to numerous Fortune 500 and multinational corporations. The non-profit sector, universities, and the manufacturing industry (although declined) also contribute to the city&#39;s economy.&quot;],
+  &#39;b51abfb6-5a74-4225-b0fc-2bd5ce1270a4&#39;: [&#39;The borough of Brooklyn has the highest population in New York City.&#39;],
+  &#39;a0f330d3-5d5e-4da4-8637-0a57cd22b761&#39;: [&#39;The population of New York City as of 2020 is 8,804,190.&#39;]}}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Langchain"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-a-rag-pipeline">Build a RAG pipeline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coldstart-eval-data">Coldstart eval data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-evaluation-chains">Run Evaluation chains</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-qa-with-langsmith">Evaluating QA with langsmith</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-dataset">1. Create a dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-qa-chain-to-evaluate">2. Define the QA chain to evaluate</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate">3. Evaluate</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By ExplodingGradients
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

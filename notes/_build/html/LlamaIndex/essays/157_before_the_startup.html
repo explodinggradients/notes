@@ -1,0 +1,532 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>157 Before the Startup &#8212; Notes</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'LlamaIndex/essays/157_before_the_startup';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Notes</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    <no title>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mf-guidence/README.html">Guidence</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mf-guidence/guidence101.html">Guidence 101</a></li>
+</ul>
+</li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Langchain/README.html">Langchain Internals</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Langchain/prompts.html">Prompts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Langchain/chains.html">Chains - Intro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Langchain/evaluations.html">Evaluations - Intro</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FLlamaIndex/essays/157_before_the_startup.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/LlamaIndex/essays/157_before_the_startup.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>157 Before the Startup</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="before-the-startup">
+<h1>157 Before the Startup<a class="headerlink" href="#before-the-startup" title="Permalink to this heading">#</a></h1>
+<p><strong>Want to start a startup?</strong> Get funded by <a class="reference external" href="http://ycombinator.com/apply.html">Y Combinator</a>.</p>
+<p>October 2014</p>
+<p><em>(This essay is derived from a guest lecture in Sam Altman’s<a class="reference external" href="http://startupclass.samaltman.com/">startup class</a> at Stanford. It’s intended for college students, but much of it is applicable to potential founders at other ages.)</em></p>
+<p>One of the advantages of having kids is that when you have to give advice, you can ask yourself “what would I tell my own kids?” My kids are little, but I can imagine what I’d tell them about startups if they were in college, and that’s what I’m going to tell you.</p>
+<p>Startups are very counterintuitive. I’m not sure why. Maybe it’s just because knowledge about them hasn’t permeated our culture yet. But whatever the reason, starting a startup is a task where you can’t always trust your instincts.</p>
+<p>It’s like skiing in that way. When you first try skiing and you want to slow down, your instinct is to lean back. But if you lean back on skis you fly down the hill out of control. So part of learning to ski is learning to suppress that impulse. Eventually you get new habits, but at first it takes a conscious effort. At first there’s a list of things you’re trying to remember as you start down the hill.</p>
+<p>Startups are as unnatural as skiing, so there’s a similar list for startups. Here I’m going to give you the first part of it – the things to remember if you want to prepare yourself to start a startup.</p>
+<p><strong>Counterintuitive</strong></p>
+<p>The first item on it is the fact I already mentioned: that startups are so weird that if you trust your instincts, you’ll make a lot of mistakes. If you know nothing more than this, you may at least pause before making them.</p>
+<p>When I was running Y Combinator I used to joke that our function was to tell founders things they would ignore. It’s really true. Batch after batch, the YC partners warn founders about mistakes they’re about to make, and the founders ignore them, and then come back a year later and say “I wish we’d listened.”</p>
+<p>Why do the founders ignore the partners’ advice? Well, that’s the thing about counterintuitive ideas: they contradict your intuitions. They seem wrong. So of course your first impulse is to disregard them. And in fact my joking description is not merely the curse of Y Combinator but part of its raison d’etre. If founders’ instincts already gave them the right answers, they wouldn’t need us. You only need other people to give you advice that surprises you. That’s why there are a lot of ski instructors and not many running instructors. [1]</p>
+<p>You can, however, trust your instincts about people. And in fact one of the most common mistakes young founders make is not to do that enough. They get involved with people who seem impressive, but about whom they feel some misgivings personally. Later when things blow up they say “I knew there was something off about him, but I ignored it because he seemed so impressive.”</p>
+<p>If you’re thinking about getting involved with someone – as a cofounder, an employee, an investor, or an acquirer – and you have misgivings about them, trust your gut. If someone seems slippery, or bogus, or a jerk, don’t ignore
+it.</p>
+<p>This is one case where it pays to be self-indulgent. Work with people you genuinely like, and you’ve known long enough to be sure.</p>
+<p><strong>Expertise</strong></p>
+<p>The second counterintuitive point is that it’s not that important to know a lot about startups. The way to succeed in a startup is not to be an expert on startups, but to be an expert on your users and the problem you’re solving for them. Mark Zuckerberg didn’t succeed because he was an expert on startups. He succeeded despite being a complete noob at startups, because he understood his users really well.</p>
+<p>If you don’t know anything about, say, how to raise an angel round, don’t feel bad on that account. That sort of thing you can learn when you need to, and forget after you’ve done it.</p>
+<p>In fact, I worry it’s not merely unnecessary to learn in great detail about the mechanics of startups, but possibly somewhat dangerous. If I met an undergrad who knew all about convertible notes and employee agreements and (God forbid) class FF stock, I wouldn’t think “here is someone who is way ahead of their peers.” It would set off alarms. Because another of the characteristic mistakes of young founders is to go through the motions of starting a startup. They make up some plausible-sounding idea, raise money at a good valuation, rent a cool office, hire a bunch of people. From the outside that seems like what startups do. But the next step after rent a cool office and hire a bunch of people is: gradually realize how completely fucked they are, because while imitating all the outward forms of a startup they have neglected the one thing that’s actually essential: making something people want.</p>
+<p><strong>Game</strong></p>
+<p>We saw this happen so often that we made up a name for it: playing house. Eventually I realized why it was happening. The reason young founders go through the motions of starting a startup is because that’s what they’ve been trained to do for their whole lives up to that point. Think about what you have to do to get into college, for example. Extracurricular activities, check. Even in college classes most of the work is as artificial as running laps.</p>
+<p>I’m not attacking the educational system for being this way. There will always be a certain amount of fakeness in the work you do when you’re being taught something, and if you measure their performance it’s inevitable that people will exploit the difference to the point where much of what you’re measuring is artifacts of the fakeness.</p>
+<p>I confess I did it myself in college. I found that in a lot of classes there might only be 20 or 30 ideas that were the right shape to make good exam questions. The way I studied for exams in these classes was not (except incidentally) to master the material taught in the class, but to make a list of potential exam questions and work out the answers in advance. When I walked into the final, the main thing I’d be feeling was curiosity about which of my questions would turn up on the exam. It was like a game.</p>
+<p>It’s not surprising that after being trained for their whole lives to play such games, young founders’ first impulse on starting a startup is to try to figure out the tricks for winning at this new game. Since fundraising appears to be the measure of success for startups (another classic noob mistake), they always want to know what the tricks are for convincing investors. We tell them the best way to <span class="xref myst">convince investors</span> is to make a startup that’s actually doing well, meaning <span class="xref myst">growing fast</span>, and then simply tell investors so. Then they want to know what the tricks are for growing fast. And we have to tell them the best way to do that is simply to make something people want.</p>
+<p>So many of the conversations YC partners have with young founders begin with the founder asking “How do we…” and the partner replying “Just…”</p>
+<p>Why do the founders always make things so complicated? The reason, I realized, is that they’re looking for the trick.</p>
+<p>So this is the third counterintuitive thing to remember about startups: starting a startup is where gaming the system stops working. Gaming the system may continue to work if you go to work for a big company. Depending on how broken the company is, you can succeed by sucking up to the right people, giving the impression of productivity, and so on. [2] But that doesn’t work with startups. There is no boss to trick, only users, and all users care about is whether your product does what they want. Startups are as impersonal as physics. You have to make something people want, and you prosper only to the extent you do.</p>
+<p>The dangerous thing is, faking does work to some degree on investors. If you’re super good at sounding like you know what you’re talking about, you can fool investors for at least one and perhaps even two rounds of funding. But it’s not in your interest to. The company is ultimately doomed. All you’re doing is wasting your own time riding it down.</p>
+<p>So stop looking for the trick. There are tricks in startups, as there are in any domain, but they are an order of magnitude less important than solving the real problem. A founder who knows nothing about fundraising but has made something users love will have an easier time raising money than one who knows every trick in the book but has a flat usage graph. And more importantly, the founder who has made something users love is the one who will go on to succeed after raising the money.</p>
+<p>Though in a sense it’s bad news in that you’re deprived of one of your most powerful weapons, I think it’s exciting that gaming the system stops working when you start a startup. It’s exciting that there even exist parts of the world where you win by doing good work. Imagine how depressing the world would be if it were all like school and big companies, where you either have to spend a lot of time on bullshit things or lose to people who do. [3] I would have been delighted if I’d realized in college that there were parts of the real world where gaming the system mattered less than others, and a few where it hardly mattered at all. But there are, and this variation is one of the most important things to consider when you’re thinking about your future. How do you win in each type of work, and what would you like to win by doing? [4]</p>
+<p><strong>All-Consuming</strong></p>
+<p>That brings us to our fourth counterintuitive point: startups are all- consuming. If you start a startup, it will take over your life to a degree you cannot imagine. And if your startup succeeds, it will take over your life for a long time: for several years at the very least, maybe for a decade, maybe for the rest of your working life. So there is a real opportunity cost here.</p>
+<p>Larry Page may seem to have an enviable life, but there are aspects of it that are unenviable. Basically at 25 he started running as fast as he could and it must seem to him that he hasn’t stopped to catch his breath since. Every day new shit happens in the Google empire that only the CEO can deal with, and he, as CEO, has to deal with it. If he goes on vacation for even a week, a whole week’s backlog of shit accumulates. And he has to bear this uncomplainingly, partly because as the company’s daddy he can never show fear or weakness, and partly because billionaires get less than zero sympathy if they talk about having difficult lives. Which has the strange side effect that the difficulty of being a successful startup founder is concealed from almost everyone except those who’ve done it.</p>
+<p>Y Combinator has now funded several companies that can be called big successes, and in every single case the founders say the same thing. It never gets any easier. The nature of the problems change. You’re worrying about construction delays at your London office instead of the broken air conditioner in your studio apartment. But the total volume of worry never decreases; if anything it increases.</p>
+<p>Starting a successful startup is similar to having kids in that it’s like a button you push that changes your life irrevocably. And while it’s truly wonderful having kids, there are a lot of things that are easier to do before you have them than after. Many of which will make you a better parent when you do have kids. And since you can delay pushing the button for a while, most people in rich countries do.</p>
+<p>Yet when it comes to startups, a lot of people seem to think they’re supposed to start them while they’re still in college. Are you crazy? And what are the universities thinking? They go out of their way to ensure their students are well supplied with contraceptives, and yet they’re setting up entrepreneurship programs and startup incubators left and right.</p>
+<p>To be fair, the universities have their hand forced here. A lot of incoming students are interested in startups. Universities are, at least de facto, expected to prepare them for their careers. So students who want to start startups hope universities can teach them about startups. And whether universities can do this or not, there’s some pressure to claim they can, lest they lose applicants to other universities that do.</p>
+<p>Can universities teach students about startups? Yes and no. They can teach students about startups, but as I explained before, this is not what you need to know. What you need to learn about are the needs of your own users, and you can’t do that until you actually start the company. [5] So starting a startup is intrinsically something you can only really learn by doing it. And it’s impossible to do that in college, for the reason I just explained: startups take over your life. You can’t start a startup for real as a student, because if you start a startup for real you’re not a student anymore. You may be nominally a student for a bit, but you won’t even be that for long. [6]</p>
+<p>Given this dichotomy, which of the two paths should you take? Be a real student and not start a startup, or start a real startup and not be a student? I can answer that one for you. Do not start a startup in college. How to start a startup is just a subset of a bigger problem you’re trying to solve: how to have a good life. And though starting a startup can be part of a good life for a lot of ambitious people, age 20 is not the optimal time to do it. Starting a startup is like a brutally fast depth-first search. Most people should still be searching breadth-first at 20.</p>
+<p>You can do things in your early 20s that you can’t do as well before or after, like plunge deeply into projects on a whim and travel super cheaply with no sense of a deadline. For unambitious people, this sort of thing is the dreaded “failure to launch,” but for the ambitious ones it can be an incomparably valuable sort of exploration. If you start a startup at 20 and you’re sufficiently successful, you’ll never get to do it. [7]</p>
+<p>Mark Zuckerberg will never get to bum around a foreign country. He can do other things most people can’t, like charter jets to fly him to foreign countries. But success has taken a lot of the serendipity out of his life. Facebook is running him as much as he’s running Facebook. And while it can be very cool to be in the grip of a project you consider your life’s work, there are advantages to serendipity too, especially early in life. Among other things it gives you more options to choose your life’s work from.</p>
+<p>There’s not even a tradeoff here. You’re not sacrificing anything if you forgo starting a startup at 20, because you’re more likely to succeed if you wait. In the unlikely case that you’re 20 and one of your side projects takes off like Facebook did, you’ll face a choice of running with it or not, and it may be reasonable to run with it. But the usual way startups take off is for the founders to <span class="xref myst">make them</span> take off, and it’s gratuitously stupid to do that at 20.</p>
+<p><strong>Try</strong></p>
+<p>Should you do it at any age? I realize I’ve made startups sound pretty hard. If I haven’t, let me try again: starting a startup is really hard. What if it’s too hard? How can you tell if you’re up to this challenge?</p>
+<p>The answer is the fifth counterintuitive point: you can’t tell. Your life so far may have given you some idea what your prospects might be if you tried to become a mathematician, or a professional football player. But unless you’ve had a very strange life you haven’t done much that was <span class="xref myst">like</span> being a startup founder. Starting a startup will change you a lot. So what you’re trying to estimate is not just what you are, but what you could grow into, and who can do that?</p>
+<p>For the past 9 years it was my job to predict whether people would have what it took to start successful startups. It was easy to tell how smart they were, and most people reading this will be over that threshold. The hard part was predicting how tough and ambitious they would become. There may be no one who has more experience at trying to predict that, so I can tell you how much an expert can know about it, and the answer is: not much. I learned to keep a completely open mind about which of the startups in each batch would turn out to be the stars.</p>
+<p>The founders sometimes think they know. Some arrive feeling sure they will ace Y Combinator just as they’ve aced every one of the (few, artificial, easy) tests they’ve faced in life so far. Others arrive wondering how they got in, and hoping YC doesn’t discover whatever mistake caused it to accept them. But there is little correlation between founders’ initial attitudes and how well their companies do.</p>
+<p>I’ve read that the same is true in the military – that the swaggering recruits are no more likely to turn out to be really tough than the quiet ones. And probably for the same reason: that the tests involved are so different from the ones in their previous lives.</p>
+<p>If you’re absolutely terrified of starting a startup, you probably shouldn’t do it. But if you’re merely unsure whether you’re up to it, the only way to find out is to try. Just not now.</p>
+<p><strong>Ideas</strong></p>
+<p>So if you want to start a startup one day, what should you do in college? There are only two things you need initially: an idea and cofounders. And the m.o. for getting both is the same. Which leads to our sixth and last counterintuitive point: that the way to get startup ideas is not to try to think of startup ideas.</p>
+<p>I’ve written a whole <span class="xref myst">essay</span> on this, so I won’t repeat it all here. But the short version is that if you make a conscious effort to think of startup ideas, the ideas you come up with will not merely be bad, but bad and plausible-sounding, meaning you’ll waste a lot of time on them before realizing they’re bad.</p>
+<p>The way to come up with good startup ideas is to take a step back. Instead of making a conscious effort to think of startup ideas, turn your mind into the type that startup ideas form in without any conscious effort. In fact, so unconsciously that you don’t even realize at first that they’re startup ideas.</p>
+<p>This is not only possible, it’s how Apple, Yahoo, Google, and Facebook all got started. None of these companies were even meant to be companies at first. They were all just side projects. The best startups almost have to start as side projects, because great ideas tend to be such outliers that your conscious mind would reject them as ideas for companies.</p>
+<p>Ok, so how do you turn your mind into the type that startup ideas form in unconsciously? (1) Learn a lot about things that matter, then (2) work on problems that interest you (3) with people you like and respect. The third part, incidentally, is how you get cofounders at the same time as the idea.</p>
+<p>The first time I wrote that paragraph, instead of “learn a lot about things that matter,” I wrote “become good at some technology.” But that prescription, though sufficient, is too narrow. What was special about Brian Chesky and Joe Gebbia was not that they were experts in technology. They were good at design, and perhaps even more importantly, they were good at organizing groups and making projects happen. So you don’t have to work on technology per se, so long as you work on problems demanding enough to stretch you.</p>
+<p>What kind of problems are those? That is very hard to answer in the general case. History is full of examples of young people who were working on important problems that <span class="xref myst">no one else</span> at the time thought were important, and in particular that their parents didn’t think were important. On the other hand, history is even fuller of examples of parents who thought their kids were wasting their time and who were right. So how do you know when you’re working on real stuff? [8]</p>
+<p>I know how <em>I</em> know. Real problems are interesting, and I am self-indulgent in the sense that I always want to work on interesting things, even if no one else cares about them (in fact, especially if no one else cares about them), and find it very hard to make myself work on boring things, even if they’re supposed to be important.</p>
+<p>My life is full of case after case where I worked on something just because it seemed interesting, and it turned out later to be useful in some worldly way. <a class="reference external" href="http://ycombinator.com/start.html">Y Combinator itself</a> was something I only did because it seemed interesting. So I seem to have some sort of internal compass that helps me out. But I don’t know what other people have in their heads. Maybe if I think more about this I can come up with heuristics for recognizing genuinely interesting problems, but for the moment the best I can offer is the hopelessly question-begging advice that if you have a taste for genuinely interesting problems, indulging it energetically is the best way to prepare yourself for a startup. And indeed, probably also the best way to live. [9]</p>
+<p>But although I can’t explain in the general case what counts as an interesting problem, I can tell you about a large subset of them. If you think of technology as something that’s spreading like a sort of fractal stain, every moving point on the edge represents an interesting problem. So one guaranteed way to turn your mind into the type that has good startup ideas is to get yourself to the leading edge of some technology – to cause yourself, as Paul Buchheit put it, to “live in the future.” When you reach that point, ideas that will seem to other people uncannily prescient will seem obvious to you. You may not realize they’re startup ideas, but you’ll know they’re something that ought to exist.</p>
+<p>For example, back at Harvard in the mid 90s a fellow grad student of my friends Robert and Trevor wrote his own voice over IP software. He didn’t mean it to be a startup, and he never tried to turn it into one. He just wanted to talk to his girlfriend in Taiwan without paying for long distance calls, and since he was an expert on networks it seemed obvious to him that the way to do it was turn the sound into packets and ship it over the Internet. He never did any more with his software than talk to his girlfriend, but this is exactly the way the best startups get started.</p>
+<p>So strangely enough the optimal thing to do in college if you want to be a successful startup founder is not some sort of new, vocational version of college focused on “entrepreneurship.” It’s the classic version of college as education for its own sake. If you want to start a startup after college, what you should do in college is learn powerful things. And if you have genuine intellectual curiosity, that’s what you’ll naturally tend to do if you just follow your own inclinations. [10]</p>
+<p>The component of entrepreneurship that really matters is domain expertise. The way to become Larry Page was to become an expert on search. And the way to become an expert on search was to be driven by genuine curiosity, not some ulterior motive.</p>
+<p>At its best, starting a startup is merely an ulterior motive for curiosity. And you’ll do it best if you introduce the ulterior motive toward the end of the process.</p>
+<p>So here is the ultimate advice for young would-be startup founders, boiled down to two words: just learn.</p>
+<p><strong>Notes</strong></p>
+<p>[1] Some founders listen more than others, and this tends to be a <span class="xref myst">predictor of success</span>. One of the things I remember about the Airbnbs during YC is how intently they listened.</p>
+<p>[2] In fact, this is one of the reasons startups are possible. If big companies weren’t plagued by internal inefficiencies, they’d be proportionately more effective, leaving less room for startups.</p>
+<p>[3] In a startup you have to spend a lot of time on <span class="xref myst">schleps</span>, but this sort of work is merely unglamorous, not bogus.</p>
+<p>[4] What should you do if your true calling is gaming the system? Management consulting.</p>
+<p>[5] The company may not be incorporated, but if you start to get significant numbers of users, you’ve started it, whether you realize it yet or not.</p>
+<p>[6] It shouldn’t be that surprising that colleges can’t teach students how to be good startup founders, because they can’t teach them how to be good employees either.</p>
+<p>The way universities “teach” students how to be employees is to hand off the task to companies via internship programs. But you couldn’t do the equivalent thing for startups, because by definition if the students did well they would never come back.</p>
+<p>[7] Charles Darwin was 22 when he received an invitation to travel aboard the HMS Beagle as a naturalist. It was only because he was otherwise unoccupied, to a degree that alarmed his family, that he could accept it. And yet if he hadn’t we probably would not know his name.</p>
+<p>[8] Parents can sometimes be especially conservative in this department. There are some whose definition of important problems includes only those on the critical path to med school.</p>
+<p>[9] I did manage to think of a heuristic for detecting whether you have a taste for interesting ideas: whether you find known boring ideas intolerable. Could you endure studying literary theory, or working in middle management at a large company?</p>
+<p>[10] In fact, if your goal is to start a startup, you can stick even more closely to the ideal of a liberal education than past generations have. Back when students focused mainly on getting a job after college, they thought at least a little about how the courses they took might look to an employer. And perhaps even worse, they might shy away from taking a difficult class lest they get a low grade, which would harm their all-important GPA. Good news: users <span class="xref myst">don’t care</span> what your GPA was. And I’ve never heard of investors caring either. Y Combinator certainly never asks what classes you took in college or what grades you got in them.</p>
+<p><strong>Thanks</strong> to Sam Altman, Paul Buchheit, John Collison, Patrick Collison, Jessica Livingston, Robert Morris, Geoff Ralston, and Fred Wilson for reading drafts of this.</p>
+<p>[Arabic Translation](<a class="reference external" href="https://caramel.la/yousefales/DyfU-w5hH/qbl-almshrwa-">https://caramel.la/yousefales/DyfU-w5hH/qbl-almshrwa-</a> alryady)</p>
+<hr class="docutils" />
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./LlamaIndex/essays"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By ExplodingGradients
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

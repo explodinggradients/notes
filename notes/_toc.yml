@@ -1,0 +1,20 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+parts:
+  - captions: Langchain
+    chapters:
+      - file: Langchain/README
+        sections:
+          - file: Langchain/prompts
+          - file: Langchain/llm-completion
+          - file: Langchain/llm-chat
+          - file: Langchain/chains
+          - file: Langchain/evaluations
+  - captions: Guidance
+    chapters:
+      - file: mf-guidence/README
+        sections:
+          - file: mf-guidence/guidence101
