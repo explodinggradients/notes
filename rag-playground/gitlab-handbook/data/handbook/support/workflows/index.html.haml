@@ -1,0 +1,35 @@
+---
+layout: default
+title: Support Workflows
+description: Workflows in GitLab Support. Page should not be moved without a Support Global Change Management issue.
+---
+
+%style
+  :plain
+    h3::before {
+      display: block;
+      content: " ";
+      margin-top: -25px !important;
+      height: 25px !important;
+      visibility: hidden;
+    }
+
+- pages = sitemap.resources.select { |resource| resource.path.start_with?("handbook/support/workflows")  }
+- pages = pages.reject { |page| page.data.category.nil? }.group_by { |page| page.data.category }.sort_by { |category| category }
+
+.wrapper.sidebar-layout-wrapper.clearfix
+  %aside.tocs-sidebar
+    = partial "includes/layout/codeowners.html.haml"
+    = partial "includes/layout/edit_page.html.haml"
+    = partial "handbook/support/workflows/toc.html.haml", locals: {pages: pages}
+
+  .container.md-page{ class: (current_page.data.page_class if current_page.data.page_class) }
+    %ol.breadcrumb
+      %li.meta-signage-header You are here:
+      = breadcrumbs(current_page)
+    = partial "includes/layout/handbook_search.html.haml"
+    .hidden-md.hidden-lg
+      = partial "includes/layout/codeowners.html.haml"
+
+    - pages.each do |category, pages|
+      = partial "handbook/support/workflows/category", locals: { category: category, pages: pages }
