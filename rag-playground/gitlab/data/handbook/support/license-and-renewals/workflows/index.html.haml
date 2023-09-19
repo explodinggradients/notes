@@ -1,0 +1,57 @@
+---
+layout: default
+title: License & Renewal Workflows
+---
+- pages = sitemap.resources.select { |resource| resource.path.start_with?("handbook/support/license-and-renewals/workflows")  }
+- pages = pages.reject {|page| page.data.category.nil?}.group_by { |page| page.data.category }.sort_by { |category| category }
+
+.container
+  .row
+    .col-sm-12
+      %ol.breadcrumb
+        %li You are here:
+        = breadcrumbs(current_page)
+
+.container
+  .row
+    .col-sm-12
+      = partial "includes/layout/handbook_search.html.haml"
+
+.container
+  .row
+    .col-md-3
+      %section
+        %h4.clearfix Categories
+        %ul.nav
+          - pages.each do |category, workflow_pages|
+            %li
+              %a{:href => "##{category}" }
+                %span.badge.pull-right> #{workflow_pages.count}
+                #{category}
+
+    .col-md-9
+      .h2 Workflows
+
+      %p
+        These workflows require deeper knowledge of the systems or company
+        policies involved in GitLab licenses and subscriptions. If a workflow is
+        something that most, if not all, Support team members should know about,
+        put it in the
+        %a{href: '../../workflows/index.html'} Support Workflows
+        page instead.
+
+      - pages.each do |category, workflow_pages|
+        .col-xs-12.col-centered
+          %h4.clearfix
+            %i.far.fa-folder-open.fa-fw.text-muted
+            %small.pull-right
+              %i.far.fa-hdd.fa-fw
+              #{workflow_pages.count}
+            #{category}
+            %a{:name=> "#{category}" }
+          - workflow_pages.each do |page|
+            %ul.fa-ul
+              %li
+                %i.fa-li.far.fa-list-alt.fa-fw.text-muted
+                %h5
+                  = link_to page.data.title, "/" + page.path

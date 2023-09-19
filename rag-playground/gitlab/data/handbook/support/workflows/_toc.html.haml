@@ -1,0 +1,7 @@
+%h4 Categories
+%ul
+  - pages.each do |category, workflow_pages|
+    %li
+      %a{ href: "##{category.parameterize}" }
+        %span.badge.pull-right> #{workflow_pages.count}
+        #{category}
