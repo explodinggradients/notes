@@ -7,3 +7,5 @@
 # integrations
 **/.chroma/index
 **/wandb
+**/*.pdf
+**/arxiv-llm/textdata
