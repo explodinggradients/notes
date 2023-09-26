@@ -1,0 +1,301 @@
+,question,context,answer,question_type,episode_done
+0,What are the potential drawbacks of incorporating JiHu-specific database objects into GitLab?,"- ""Even though we can switch back to GitLab given the same database schema, we have not yet decided how to treat existing JiHu-specific data in that situation.""
+- ""Once switched back to GitLab, there will be no code anymore that maintains JiHu-specific data - which might cause issues e.g. because of constraint violations or inconsistent data in case the installation is later moved back to JiHu again.""
+- ""We add database objects to GitLab that are unused in the codebase.""
+- ""We accept overhead for any GitLab installation, including GitLab.com,to create and maintain JiHu-specific database objects that are not strictly in use by or necessary for GitLab.""
+- ""Always having to go through GitLab to add database migrations limits flexibility for JiHu.""
+- ""Code review overhead: Without accompanying code, it is often difficult to provide meaningful feedback for database design.""","The potential drawbacks of incorporating JiHu-specific database objects into GitLab are:
+1. Constraint violations and inconsistent data: If the installation is later moved back to JiHu, there may be issues with constraint violations or inconsistent data because there will be no code maintaining JiHu-specific data in GitLab.
+2. Unused database objects: Adding database objects to GitLab that are unused in the codebase can lead to unnecessary overhead and maintenance.
+3. Overhead for GitLab installations: Creating and maintaining JiHu-specific database objects that are not strictly necessary for GitLab can add overhead to any GitLab installation, including GitLab.com.
+4. Limited flexibility for JiHu: Always having to go through GitLab to add database migrations can limit flexibility for JiHu.
+5. Code review overhead: Without accompanying code, providing meaningful feedback for database design can be difficult, leading to additional overhead in the code review process.",multi_context,False
+1,"On the other hand, what are the potential risks or complications that may arise from adding JiHu-specific database objects to GitLab?","- Even though we can switch back to GitLab given the same database schema, we have not yet decided how to treat existing JiHu-specific data in that situation.
+- Once switched back to GitLab, there will be no code anymore that maintains JiHu-specific data - which might cause issues e.g. because of constraint violations or inconsistent data in case the installation is later moved back to JiHu again.
+- We add database objects to GitLab that are unused in the codebase.
+- By annotating objects, we keep track of this to reduce confusion.
+- We accept overhead for any GitLab installation, including GitLab.com, to create and maintain JiHu-specific database objects that are not strictly in use by or necessary for GitLab.
+- For GitLab.com, we may choose to ignore JiHu-specific indexes (we don't need to be able to upgrade to JH).
+- Always having to go through GitLab to add database migrations limits flexibility for JiHu.
+- We expect benefits from collaborating closely on database design in terms of knowledge exchange.
+- Without accompanying code, it is often difficult to provide meaningful feedback for database design.
+- We ask to link relevant code changes and provide as much information as possible upfront.","The potential risks or complications that may arise from adding JiHu-specific database objects to GitLab include constraint violations and inconsistent data if the installation is later moved back to JiHu. Additionally, there may be unused database objects in GitLab that are not necessary for its functionality. However, these objects are annotated to reduce confusion. There may also be overhead in creating and maintaining JiHu-specific database objects for GitLab installations. For GitLab.com, JiHu-specific indexes may be ignored. Adding database migrations through GitLab limits flexibility for JiHu. However, there are expected benefits from collaborating closely on database design, such as knowledge exchange. Without accompanying code, it may be difficult to provide meaningful feedback for database design, so it is requested to link relevant code changes and provide as much information as possible upfront.",multi_context,True
+2,What should be included in the briefing document for candidate interviews in terms of meeting duration and visibility options?,"- Candidate interviews should default to 50 minutes unless there is a specific request to make the meeting shorter or longer.
+- There should be an invite that includes both the candidate and the CEO.
+- If this is a C-level candidate or it is otherwise requested, the meeting should have ""private"" visibility. Otherwise, it can be ""public.""
+- There should be a second calendar invite from Sid's account with the subject: [Shadow or No Shadows] CEO Briefing Doc: [Person's Name].
+- This should follow the ""private"" conventions shared in item 2.
+- This invite should include a briefing document that contains the following information:
+  - Role with a link to the job family
+  - Candidate's LinkedIn link
+  - Link to resume
+  - Link to the prep package from the recruiter (relevant for searches with external recruiters)
+  - Summary of interviews to date
+  - Concerns for the interviewer to dig into.
+  - Focus of the call. Is it more about evaluating the candidate or more about getting the candidate excited about the position?
+  - The Greenhouse link or a place for ""CEO Notes""","The briefing document for candidate interviews should include the following information:
+- Meeting duration: The default duration for candidate interviews should be 50 minutes, unless there is a specific request to make the meeting shorter or longer.
+- Visibility options: If the candidate is a C-level candidate or if it is otherwise requested, the meeting should have ""private"" visibility. Otherwise, it can be ""public.""
+- Invite: The invite should include both the candidate and the CEO.
+- Second calendar invite: There should be a second calendar invite from Sid's account with the subject: [Shadow or No Shadows] CEO Briefing Doc: [Person's Name]. This invite should follow the ""private"" conventions shared in item 2.
+- Briefing document: The invite should include a briefing document that contains the following information:
+  - Role with a link to the job family
+  - Candidate's LinkedIn link
+  - Link to resume
+  - Link to the prep package from the recruiter (relevant for searches with external recruiters)
+  - Summary of interviews to date
+  - Concerns for the interviewer to dig into
+  - Focus of the call: Whether it is more about evaluating the candidate or more about getting the candidate excited about the position
+  - The Greenhouse link or a place for ""CEO Notes""",conditional,False
+3,What specific content requirements should be considered when creating a briefing document for candidate interviews?,"- There should be a second calendar invite from Sid's account with the subject: [Shadow or No Shadows] CEO Briefing Doc: [Person's Name].
+- This invite should include a briefing document that contains the following information:
+- Role with a link to the job family
+- Candidate's LinkedIn link
+- Link to resume
+- Link to the prep package from the recruiter (relevant for searches with external recruiters)
+- Summary of interviews to date
+- Concerns for the interviewer to dig into.
+- Focus of the call. Is it more about evaluating the candidate or more about getting the candidate excited about the position?
+- The Greenhouse link or a place for ""CEO Notes""","The specific content requirements that should be considered when creating a briefing document for candidate interviews are:
+
+1. Role with a link to the job family
+2. Candidate's LinkedIn link
+3. Link to resume
+4. Link to the prep package from the recruiter (relevant for searches with external recruiters)
+5. Summary of interviews to date
+6. Concerns for the interviewer to dig into
+7. Focus of the call - whether it is more about evaluating the candidate or getting the candidate excited about the position
+8. The Greenhouse link or a place for ""CEO Notes""",conditional,True
+4,What is the responsibility of the incoming shadow in the onboarding process?,"- Outgoing shadows are responsible for training incoming shadows.
+- The incoming shadow is responsible for creating their onboarding issue.
+- Assign the issue to both the incoming and outgoing shadows.
+- The incoming shadow is responsible for creating their onboarding issue by the Friday before they start the program.",The responsibility of the incoming shadow in the onboarding process is to create their onboarding issue by the Friday before they start the program.,simple,True
+5,What specific aspects of JiHu product decisions are handled by other teams or individuals besides GitLab Product Managers?,"- GitLab Product Managers are not responsible for JiHu product decisions, such as tiering, pricing.
+- Just like PMs aren't the arbiters of community contribution, product managers are not the arbiter of what the JiHu team works on.
+- We differentiate proprietary features for JiHu distributions by including them in the `/jh` directory.
+- However, the majority of contributions from JiHu team members should be outside of the `/jh` directory signaling the expectation that most contributions are to GitLab Core and only certain specific features are exclusive to the /jh offering.","Other teams or individuals besides GitLab Product Managers handle the specific aspects of JiHu product decisions, such as tiering and pricing.",conditional,False
+6,"In terms of JiHu product decisions, what areas do GitLab Product Managers not have control over?","- GitLab Product Managers are not responsible for JiHu product decisions, such as tiering, pricing.
+- Just like PMs aren't the arbiters of community contribution, product managers are not the arbiter of what the JiHu team works on.
+- We differentiate proprietary features for JiHu distributions by including them in the `/jh` directory.
+- However, the majority of contributions from JiHu team members should be outside of the `/jh` directory signaling the expectation that most contributions are to GitLab Core and only certain specific features are exclusive to the /jh offering.",GitLab Product Managers do not have control over JiHu product decisions such as tiering and pricing.,conditional,True
+7,What should you do during the CEO's 1:1 meetings as a remote shadow?,"- Take breaks from your desk when there is a break in the CEO's schedule.
+- Consider switching locations in your home or workspace during the CEO's 1:1 meetings.
+- It is OK if you need to drop from a meeting to handle tasks at home, from childcare to answering the door, or anything in between.
+- Consider taking one or two days off after your rotation.","During the CEO's 1:1 meetings as a remote shadow, you should take breaks from your desk when there is a break in the CEO's schedule. You can also consider switching locations in your home or workspace during these meetings. It is also acceptable if you need to drop from a meeting to handle tasks at home or any other responsibilities. Additionally, it is recommended to take one or two days off after your rotation.",simple,True
+8,What are the specific guidelines in the Communication guidelines for reminding employees about slide preparation for the CEO's video in the absence of timely announcements?,"- If there aren't any timely announcements, take this opportunity to remind folks about some of the key features of our Communication guidelines, including our Top Misused Terms, MECEFU, or Why we track public Slack messages.
+- Be sure that slides are prepared with enough notice for the CEO to record a video and for it to be shared at least 24 hours in advance of the Group Conversation.","The specific guidelines in the Communication guidelines for reminding employees about slide preparation for the CEO's video in the absence of timely announcements are to remind employees about the key features of the Communication guidelines, such as the Top Misused Terms, MECEFU, or the reason for tracking public Slack messages. Additionally, it is important to ensure that slides are prepared with enough notice for the CEO to record a video and for it to be shared at least 24 hours in advance of the Group Conversation.",reasoning,True
+9,What are some short-term administrative tasks that a CEO Shadow may be asked to perform during the program?,"- ""There are many short-term administrative tasks you'll be asked to perform as a shadow.""
+- ""Here are some examples:""
+- ""Make handbook updates (use the ceo-shadow label).""
+- ""Post the MR links in the `#ceo` Slack channel and `@`-reference the CEO so the CEO knows they have been completed.""
+- ""Draft a 'tweet storm'.""
+- ""Solve urgent issues.""
+- ""Go through open merge requests and work towards merging or closing any that have not been merged.""
+- ""Go through open issues in the CEO shadow project and work towards closing or creating a subsequent merge request to close out.""
+- ""Iterate and complete small tasks as they come up.""
+- ""Compile a report on a subject.""
+- ""Write a blog post on the public company blog, a recorded reflection of your experience, or a CEO Interview on a topic of your choice.""
+- ""Provide training to the incoming CEO Shadow(s).""
+- ""Prepare for, take notes during, and follow up on meetings.""
+- ""Publicly advise when people are not following the communication guidelines.""
+- ""Share thanks in the `#thanks` channel in Slack when it comes from a customer or wider community member in a meeting.""
+- ""Speak up when the CEO displays flawed behavior.""
+- ""Immediately following meetings, score the CEO on overall positivity score in the `Positivity Score` google sheet shared with `ceo-shadow@gitlab.com`.""
+- ""Ensure visual aids and presentations are visible to guests during in-person meetings.""
+- ""Prepare for and receive guests at Mission Control.""
+- ""Offer GitLab swag to guests at Mission Control before they leave.""
+- ""Answer the phone and door at Mission control.""","Some short-term administrative tasks that a CEO Shadow may be asked to perform during the program include making handbook updates, posting MR links in the Slack channel, drafting a 'tweet storm', solving urgent issues, going through open merge requests and issues, completing small tasks as they come up, compiling reports, writing blog posts, providing training to incoming CEO Shadows, preparing for and taking notes during meetings, publicly advising when communication guidelines are not followed, sharing thanks in the Slack channel, speaking up when the CEO displays flawed behavior, scoring the CEO's overall positivity, ensuring visual aids and presentations are visible during meetings, preparing for and receiving guests at Mission Control, offering GitLab swag to guests, and answering the phone and door at Mission Control.",reasoning,False
+10,How are these tasks related to attending meetings with the CEO?,"- Of course, you'll also attend meetings that the CEO attends.
+- During meetings, you will:
+- Prepare for, take notes during, and follow up on meetings.
+- Publicly advise when people are not following the communication guidelines.
+- Share thanks in the `#thanks` channel in Slack when it comes from a customer or wider community member in a meeting.
+- Speak up when the CEO displays flawed behavior.
+- Immediately following meetings, score the CEO on overall positivity score in the `Positivity Score` google sheet shared with `ceo-shadow@gitlab.com`.
+- Each shadow should give a score for all meetings attended.
+- Scores can range from 1 (the least positive someone could respectfully be) to 5 (CEO was highly engaged, reactions were authentically positive), focused on the CEO's presence and reactions during the meeting.
+- At the end of the day, post the score for each meeting to the `#ceo-shadow-private` Slack channel and `@` mention the CEO.
+- Ensure visual aids and presentations are visible to guests during in-person meetings.
+- Prepare for and receive guests at Mission Control.
+- Offer GitLab swag to guests at Mission Control before they leave.
+- Answer the phone and door at Mission control.","These tasks are related to attending meetings with the CEO because they involve preparing for, taking notes during, and following up on meetings. Additionally, the tasks include publicly advising when people are not following communication guidelines, speaking up when the CEO displays flawed behavior, and scoring the CEO on overall positivity in meetings. The tasks also involve posting the scores for each meeting to the designated Slack channel and mentioning the CEO. Furthermore, the tasks include ensuring visual aids and presentations are visible to guests during in-person meetings, preparing for and receiving guests at Mission Control, offering GitLab swag to guests, and answering the phone and door at Mission Control.",reasoning,True
+11,Who can assist product managers in establishing connections with JiHu counterparts?,"- Product Managers can share their public directions and work with the JiHu team to help JiHu become self-sufficient and efficient.
+- At times, product managers are asked to provide feedback or directly respond to specific proposals from JiHu.
+- GitLab PMs should help facilitate collaboration between GitLab engineers and the JiHu team.
+- If product managers need help connecting with JiHu counterparts, ping the Product DRI in #jihu-product.",The Product DRI in #jihu-product can assist product managers in establishing connections with JiHu counterparts.,conditional,False
+12,"If product managers require assistance in connecting with JiHu counterparts, who should they reach out to?","- If product managers need help connecting with JiHu counterparts, ping the Product DRI in #jihu-product.",Product managers should reach out to the Product DRI in #jihu-product for assistance in connecting with JiHu counterparts.,conditional,True
+13,What is the role of the Chief of Staff Team to the CEO in addressing under-resourced projects?,"- The Chief of Staff Team to the CEO should be known for its ability to become 80% effective on any subject quickly.
+- They are meant to be able to address important problems as they come up.
+- A member of the CoST to the CEO might help source candidates for a strategic hire, fix grammatical errors in the handbook, and build a financial model all in the same day based on what is important or top of mind for the CEO at a given point.
+- The goal of the team is not to do the work of other teams, but to help address work that those teams may not have the bandwidth to address but are important to the organization and/or the CEO.
+- Because of the team's ability to come up to speed quickly, they may be tasked with something totally out of their domain with the expectation that they bring their leadership experience to the table, will do the work to make good decisions, and will lean on team members who are subject-matter experts.
+- As a recent example, there has historically been no DRI for the handbook or related content sites. As it became clear that this was a GitLab priority, but no function planned to prioritize this within the coming year, the CoST to the CEO stepped in to take on handbook ownership.","The role of the Chief of Staff Team to the CEO in addressing under-resourced projects is to help address work that other teams may not have the capacity to handle, but are important to the organization and/or the CEO. They are known for their ability to quickly become effective on any subject and can assist with sourcing candidates, fixing errors, and building financial models based on the CEO's priorities. They are not meant to do the work of other teams, but rather to provide support and leadership in making good decisions. They may also take on projects outside of their domain and rely on subject-matter experts within the team. An example of this is when the CoST to the CEO took ownership of the handbook when no other function prioritized it within the coming year.",simple,True
+14,How does the CEO's practice of having external networking conversations with industry leaders from underrepresented groups help them in setting better targets?,"- I keep in touch with various industry leaders on a regular basis (monthly, quarterly or annually).
+- This helps me to understand what great looks like as it offers me a lens into other companies and what has made them successful or held them back.
+- I ask questions about how they would approach GitLab's current challenges or opportunities.
+- I have these conversations across all functions because it is important for me to have external, subject-specific mentors.
+- Better understanding individual functions helps me set better targets, ask better questions, and be a better partner to functional leaders.
+- I try to prioritize people from underrepresented groups, because I see value in learning from folks with different backgrounds.","The CEO's practice of having external networking conversations with industry leaders from underrepresented groups helps them in setting better targets by providing them with a better understanding of individual functions. By engaging with leaders from different backgrounds, the CEO gains insights into different approaches and perspectives that can inform their target-setting process. This practice also allows the CEO to ask better questions and be a better partner to functional leaders, ultimately leading to more informed and effective target-setting decisions.",reasoning,False
+15,In what ways does the CEO's engagement with industry leaders from underrepresented groups contribute to their ability to be a better partner to functional leaders?,"- I keep in touch with various industry leaders on a regular basis (monthly, quarterly or annually).
+- In these meetings, I get to learn from and know senior leaders within the industry.
+- This helps me to understand what great looks like as it offers me a lens into other companies and what has made them successful or held them back.
+- I ask questions about how they would approach GitLab's current challenges or opportunities.
+- I often share insights from my conversations with functional leaders and other team members.
+- Better understanding individual functions helps me set better targets, ask better questions, and be a better partner to functional leaders.
+- I try to prioritize people from underrepresented groups, because I see value in learning from folks with different backgrounds.","The CEO's engagement with industry leaders from underrepresented groups contributes to their ability to be a better partner to functional leaders in several ways. Firstly, by keeping in touch with various industry leaders, the CEO is able to learn from and know senior leaders within the industry. This provides them with a broader understanding of what success looks like in other companies and what challenges they may face. This knowledge can then be applied to GitLab's current challenges and opportunities.
+
+Additionally, by asking questions about how these industry leaders would approach GitLab's challenges or opportunities, the CEO gains valuable insights and perspectives that can inform their decision-making and problem-solving. This allows them to set better targets and ask better questions when working with functional leaders.
+
+Furthermore, the CEO's engagement with industry leaders from underrepresented groups prioritizes learning from individuals with different backgrounds. This diversity of perspectives can lead to more innovative and inclusive solutions, as well as a better understanding of the needs and experiences of underrepresented groups. By incorporating these insights into their interactions with functional leaders, the CEO can be a more effective partner and advocate for diversity and inclusion within the organization.",reasoning,True
+16,What is the purpose of the upstream feature planning issue?,"1. ""At least one milestone prior to the milestone where implementation starts - JiHu team creates an upstream feature planning issue that provides an overview of the feature scope in English, intended uses, and iterative implementation plan.""
+2. ""JiHu will ask the relevant team's PM, Product Designer and EM for feedback on the issue and implementation plan.""
+3. ""The relevant GitLab product group will provide feedback on the feature, the relevant iterative implementation plan and provide feedback to JiHu.""
+4. ""During implementation start - JiHu team will author MRs following the implementation plan and upstream guidelines below.""
+5. ""The review will be done based on the agreement in the feature planning issue.""","The purpose of the upstream feature planning issue is to provide an overview of the feature scope, intended uses, and iterative implementation plan.",simple,True
+17,What is the role of the Chief of Staff Team to the CEO in under-resourced projects?,"- When a project arises between three or more Departments, the CoST to the CEO will often be the team to execute.
+- In many cases, a member of the Chief of Staff Team to the CEO will be the directly responsible individual (DRI).
+- The CoST to the CEO is the group that can be trusted to get things done, get them done quickly, and get them done right.
+- The Chief of Staff Team to the CEO should be known for its ability to become 80% effective on any subject quickly.
+- A member of the CoST to the CEO might help source candidates for a strategic hire, fix grammatical errors in the handbook, and build a financial model all in the same day based on what is important or top of mind for the CEO at a given point.
+- The goal of the team is not to do the work of other teams, but to help address work that those teams may not have the bandwidth to address but are important to the organization and/or the CEO.","The role of the Chief of Staff Team to the CEO in under-resourced projects is to execute the project when it involves multiple departments. They are often the team responsible for getting things done quickly and correctly. They are known for their ability to quickly become effective on any subject. They may assist in various tasks such as sourcing candidates, fixing errors, and building financial models based on the CEO's priorities. Their goal is to address work that other teams may not have the capacity to handle, but is important to the organization and the CEO.",simple,True
+18,What is the process for certifying a release with JiHu contributions?,"- Check if the failure is known by searching for existing issues or merge requests:
+  - Issues labeled with `~""JiHu Broken Pipeline""`
+  - Merge requests labeled with `~""JiHu Broken Pipeline""`
+  - JiHu's issues labeled with `~""main-jh broken""`
+  - JiHu's merge requests labeled with `~""main-jh broken""`
+- Check if JiHu's pipelines are broken
+- If any related items can be found, feel free to drop a reference in the issue or merge request, and move on.
+- If nothing can be found, follow this workflow:
+- Notify JiHu for the potential breakage. You can contact @mtan-gitlab
+- Add `~""JiHu impacted""` label to the merge request so we can track this.
+- (Bonus) Investigate the failure and follow up accordingly. This can be telling JiHu why and how the failure can happen, or what they need to do or what they need to change. To better support them, figuring out a way so they can more easily follow up is encouraged.
+- Every release with JiHu contributions needs to be certified by a member of the Federal Application Security team.
+- This is required to satisfy PubSec/FedRamp requirements and to handle JiHu's merge request contributions to GitLab Inc repositories.
+- This process involves ensuring that each JiHu contribution included in the release has been reviewed and approved by an Application Security team member and posting a comment on the relevant release task issue that no new vulnerabilities have been identified in the code being released.","The process for certifying a release with JiHu contributions involves the following steps:
+1. Check if there are any known failures by searching for existing issues or merge requests labeled with `~""JiHu Broken Pipeline""` or `~""main-jh broken""`.
+2. If any related items are found, reference them in the issue or merge request and move on.
+3. If nothing can be found, notify JiHu about the potential breakage by contacting @mtan-gitlab.
+4. Add the `~""JiHu impacted""` label to the merge request.
+5. (Bonus) Investigate the failure and provide feedback to JiHu on why and how the failure occurred and what they can do to prevent it in the future.
+6. Every release with JiHu contributions must be certified by a member of the Federal Application Security team.
+7. The certification involves reviewing and approving each JiHu contribution included in the release.
+8. Once certified, post a comment on the relevant release task issue stating that no new vulnerabilities have been identified in the code being released.",simple,True
+19,How can an All-Remote team member connect a GitLab prospect to a GitLab sales member?,"- If appropriate, the GitLab team member with the contact should consider introducing the prospect to the GitLab sales member.
+- In order to make this connection to the GitLab seller (if it is not known to the All-Remote team member), the All-Remote team member should open an issue in the Field Marketing project and tag the correct regional Field Marketing leader.
+- Field Marketing will look up account ownership in SFDC (Salesforce.com) and make the connection between the GitLab seller and the All-Remote team member so they can establish next steps in connecting to the prospect.
+- The All-Remote team member should also feel comfortable asking about account ownership in the `#fieldmarketing` or `#sales` Slack channels before opening an issue.","To connect a GitLab prospect to a GitLab sales member, an All-Remote team member should follow these steps:
+1. If the All-Remote team member knows the GitLab sales member, they can directly introduce the prospect to them.
+2. If the All-Remote team member does not know the GitLab sales member, they should open an issue in the Field Marketing project.
+3. The All-Remote team member should tag the correct regional Field Marketing leader in the issue.
+4. The Field Marketing team will then look up account ownership in Salesforce.com (SFDC) to find the GitLab seller.
+5. The Field Marketing team will make the connection between the GitLab seller and the All-Remote team member.
+6. The GitLab seller and the All-Remote team member can then establish next steps in connecting to the prospect.
+7. Before opening an issue, the All-Remote team member can also ask about account ownership in the `#fieldmarketing` or `#sales` Slack channels.",simple,True
+20,What are the guidelines for creating a tweet storm for a video recording?,"- A tweet storm is a series of Twitter posts usually made as replies in a single thread on a topic.
+- CEO shadows may be asked to draft the tweets in relation to a public livestreamed video recording or some other media content.
+- Create a Google Doc with a title using the format ""202X-XX-XX Tweet storm for Topic"".
+- At the top of the document, include the full title of the media and a link to it.
+- If more than one piece of content is covered, use headings to make it easy to jump to each one.
+- Go through each pieces, noting interesting lines and quotes.
+- Draft 2-5 tweets for a 30 minute video, and up to 10 tweets for a 1 hour video.
+- The first tweet should hook the audience, pose a question, or state how GitLab does something different.
+- Attribute any lines that are not spoken by the CEO.
+- Consider looking at the CEO's social media accounts for tone and style.
+- Each tweet can contain 280 characters, URLs are counted differently. Make sure to test each tweet with the Twitter web form to tweet.
+- When you add URLs, use the card validator to render a preview. This can help to refine the tweet text.
+- More message tips can be found in the Developer Evangelism on Social Media handbook.
+- 2021-12-15 example for Chief of Staff videos (internal).
+- Once complete, change the document's Owner to the Chief of Staff to the CEO.","The guidelines for creating a tweet storm for a video recording are as follows:
+1. Create a Google Doc with a title using the format ""202X-XX-XX Tweet storm for Topic"".
+2. Include the full title of the media and a link to it at the top of the document.
+3. Use headings to separate different pieces of content if more than one is covered.
+4. Go through each piece, noting interesting lines and quotes.
+5. Draft 2-5 tweets for a 30 minute video, and up to 10 tweets for a 1 hour video.
+6. The first tweet should hook the audience, pose a question, or state how GitLab does something different.
+7. Attribute any lines that are not spoken by the CEO.
+8. Consider looking at the CEO's social media accounts for tone and style.
+9. Each tweet can contain 280 characters, URLs are counted differently. Test each tweet with the Twitter web form to tweet.
+10. Use the card validator to render a preview when adding URLs.
+11. Refer to the Developer Evangelism on Social Media handbook for more message tips.
+12. For Chief of Staff videos (internal), use the example from 2021-12-15.
+13. Once complete, change the document's Owner to the Chief of Staff to the CEO.",multi_context,True
+21,What are some short-term admin tasks for the CEO Shadow Program?,"- ""However, there are many short-term administrative tasks you'll be asked to perform as a shadow.""
+- ""Here are some examples:""
+- ""Make handbook updates (use the ceo-shadow label).""
+- ""Post the MR links in the `#ceo` Slack channel and `@`-reference the CEO so the CEO knows they have been completed.""
+- ""Draft a 'tweet storm'.""
+- ""Solve urgent issues.""
+- ""Go through open merge requests and work towards merging or closing any that have not been merged.""
+- ""Go through open issues in the CEO shadow project and work towards closing or creating a subsequent merge request to close out.""
+- ""Communicate updates on those tasks in the `#ceo-shadow` channel.""
+- ""Iterate and complete small tasks as they come up.""
+- ""Clear them out immediately to allow for rapid iteration on more crucial tasks.""
+- ""Compile a report on a subject.""
+- ""Write a blog post on the public company blog, a recorded reflection of your experience, or a CEO Interview on a topic of your choice.""
+- ""Please see information about pitching and publishing a blog post for information about the publishing process.""
+- ""Link this to the table in the Alumni section.""
+- ""Provide training to the incoming CEO Shadow(s).""
+- ""Prepare for, take notes during, and follow up on meetings.""
+- ""Publicly advise when people are not following the communication guidelines.""
+- ""Share thanks in the `#thanks` channel in Slack when it comes from a customer or wider community member in a meeting.""
+- ""Speak up when the CEO displays flawed behavior.""
+- ""Immediately following meetings, score the CEO on overall positivity score in the `Positivity Score` google sheet shared with `ceo-shadow@gitlab.com`.""
+- ""Each shadow should give a score for all meetings attended.""
+- ""Scores can range from 1 (the least positive someone could respectfully be) to 5 (CEO was highly engaged, reactions were authentically positive), focused on the CEO's presence and reactions during the meeting.""
+- ""Ensure visual aids and presentations are visible to guests during in-person meetings.""
+- ""Prepare for and receive guests at Mission Control.""
+- ""Offer GitLab swag to guests at Mission Control before they leave.""
+- ""Answer the phone and door at Mission control.""","Some short-term admin tasks for the CEO Shadow Program include making handbook updates, posting MR links in the Slack channel, drafting a 'tweet storm', solving urgent issues, going through open merge requests and issues, communicating updates in the Slack channel, completing small tasks as they come up, compiling a report on a subject, writing a blog post, providing training to incoming CEO Shadows, preparing for and taking notes during meetings, publicly advising when communication guidelines are not followed, sharing thanks in the Slack channel, speaking up when the CEO displays flawed behavior, scoring the CEO's overall positivity in meetings, ensuring visual aids are visible during in-person meetings, preparing for and receiving guests at Mission Control, offering GitLab swag to guests, and answering the phone and door at Mission Control.",multi_context,True
+22,What guidelines should be followed when preparing scripts or documents in the CEO's voice?,"- Avoid “we” or “our” when discussing the product.
+- Less is more. If you can say something in fewer words, do so.
+- Always be inclusive. No gendered terms if it can be avoided.
+- Be as direct and specific as possible.
+- Remove unnecessary words, assuming statements or lead-ins that don't add value.
+- When writing a script, read it out loud.
+- Any time you make a statement, consider whether there exist any data/proof points to back it up, and include the proof.
+- Familiarize yourself with GitLab’s Misused Terms and avoid using these.
+- Run text through a readability checker, such as the ones on this page.
+- No interrupters.
+- Be exact, not approximate.
+- Don't sugarcoat bad news.
+- Celebrate, but don't boast or brag.
+- Rarely make comparisons to other people, especially negative ones.
+- Explain the why.
+- When providing slides for me to present, follow the presentations and slide decks guidance.","When preparing scripts or documents in the CEO's voice, the following guidelines should be followed:
+- Avoid using ""we"" or ""our"" when discussing the product.
+- Use fewer words to convey the message whenever possible.
+- Use inclusive language without gendered terms.
+- Be direct and specific in the communication.
+- Remove unnecessary words and statements that don't add value.
+- Read the script out loud to ensure its effectiveness.
+- Provide data or proof points to back up any statements made.
+- Familiarize yourself with GitLab's Misused Terms and avoid using them.
+- Check the readability of the text using a readability checker.
+- Avoid using interrupters.
+- Be precise and avoid approximations.
+- Deliver bad news without sugarcoating it.
+- Celebrate achievements without boasting or bragging.
+- Minimize comparisons to other people, especially negative ones.
+- Explain the reasons behind decisions or actions.
+- Follow the presentations and slide decks guidance when providing slides for the CEO to present.",simple,True
+23,Who is the CEO of GitLab Inc.?,"Sid Sijbrandij is the Co-founder, Chief Executive Officer and Board Chair of GitLab Inc.
+Sid commercialized GitLab, and by 2015 he led the company through Y Combinator’s Winter 2015 batch.
+Under his leadership, the company has grown with an estimated 30 million+ registered users from startups to global enterprises.",The CEO of GitLab Inc. is Sid Sijbrandij.,multi_context,False
+24,Who is the Board Chair of GitLab Inc.?,"Sid Sijbrandij is the Co-founder, Chief Executive Officer and Board Chair of GitLab Inc.",The Board Chair of GitLab Inc. is Sid Sijbrandij.,multi_context,True
+25,What is the purpose of the All-Remote team's async work initiative?,"- The goal of this initiative was to create dedicated space for deep work and creative brainstorming.
+- We will continue Async Weeks as a regular process for 2022.
+- Our challenge is to reduce synchronous meetings, not to reschedule them.
+- If your meeting with an All-Remote team member is declined during an async week, we encourage you to consider whether the discussion can be conducted asynchronously instead.
+- Look for opportunities to combine this discussion with others in a single meeting.
+- Reschedule only if there are no workarounds.",The purpose of the All-Remote team's async work initiative is to create dedicated space for deep work and creative brainstorming.,multi_context,True
+26,What are the requirements to become a TeamOps Trainer: Level 1?,"- Requirements for TeamOps Trainer: Level 1
+- Complete the TeamOps practitioner course
+- Be able to answer questions (interview by existing trainer)
+- Enthusiastic presentation of about 3-5 minutes on advantages of TeamOps on YouTube (GitLab Unfiltered)
+- Contribute proposals to the materials (1+ MRs) on iterating TeamOps content to be market-ready (e.g. more applicable to your specific team or function)
+- One blog post (or similar) published on GitLab, LinkedIn, Medium, Twitter thread, etc.","The requirements to become a TeamOps Trainer: Level 1 are as follows:
+1. Complete the TeamOps practitioner course.
+2. Pass an interview conducted by an existing trainer, where you must demonstrate your ability to answer questions.
+3. Create and deliver a 3-5 minute presentation on the advantages of TeamOps on YouTube (GitLab Unfiltered).
+4. Contribute proposals to the materials by submitting 1 or more Merge Requests (MRs) on iterating TeamOps content to be market-ready, making it more applicable to your specific team or function.
+5. Publish a blog post or similar content on platforms such as GitLab, LinkedIn, Medium, or a Twitter thread.",simple,True
