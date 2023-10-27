@@ -79,9 +79,12 @@ if __name__ == "__main__":
                             negatives.append(node)
         
                     sample = {"Question":item["Question"], "Answer":item["Answer"],
-                            "positives":[pos_chunk["node"]["text"]],
-                            "negatives":[chunk["node"]["text"] for chunk in negatives],
-                            "hard_negatives":[chunk["node"]["text"] for chunk in hard_negatives]}
+                            "Context":item["Context"],
+                            "Conversation_no":item["Conversation_no"],
+                            "Turn_no":item["Turn_no"],
+                            "Positives":[pos_chunk["node"]["text"]],
+                            "Negatives":[chunk["node"]["text"] for chunk in negatives],
+                            "Hard_negatives":[chunk["node"]["text"] for chunk in hard_negatives]}
                     finetuning_dataset.append(sample)
                     
             write_to_json(filename, finetuning_dataset)
