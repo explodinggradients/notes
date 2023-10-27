@@ -107,6 +107,7 @@ def main(batch_size,train_data,data_dir, model_name, output_dir,min_chunk_size, 
             item.update({"chunks":[chunk.to_dict() for chunk in chunks]})
             subsample_list.append(item)
     
+    #TODO: call ragas after each batch & write results to json
     ragas_scores = get_ragas_score(subsample_list)["context_precision"]
     _ = [item.update({"ragas_score":score}) for item, score in zip(subsample_list, ragas_scores)]
     with open(os.path.join(output_dir, "subset.json"),"w") as file:
