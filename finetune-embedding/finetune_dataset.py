@@ -72,6 +72,7 @@ if __name__ == "__main__":
         
                         if node["node"]["hash"] == pos_chunk["node"]["hash"]:
                             hard = False
+                            continue
         
                         if hard:
                             hard_negatives.append(node)
