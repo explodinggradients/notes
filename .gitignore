@@ -3,7 +3,7 @@
 # python
 **/.ipynb_checkpoints
 .python-version
-
+finetune-embedding/wikidata
 # integrations
 **/.chroma/index
 **/wandb
