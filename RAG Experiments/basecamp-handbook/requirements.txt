@@ -1,0 +1,6 @@
+langchain_core
+langchain
+langchain_openai
+langchainhub
+chromadb
+unstructured[md]
