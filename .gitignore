@@ -9,3 +9,4 @@ finetune-embedding/wikidata
 **/wandb
 **/*.pdf
 **/arxiv-llm/textdata
+_build
