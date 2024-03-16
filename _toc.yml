@@ -2,8 +2,12 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: README
+root: intro
 parts:
-  - caption: RAG Experiments
-    chapters:
-      - file: RAG-Experiments/README.md
+- caption: RAG Experiments
+  chapters:
+  - file: RAG-Experiments/basecamp-handbook/README.md
+    sections:
+      - file: RAG-Experiments/basecamp-handbook/dataset.ipynb
+      - file: RAG-Experiments/basecamp-handbook/baseline-langchain.ipynb
+  - file: RAG-Experiments/gitlab-handbook/README.md

@@ -1,4 +1,4 @@
-# RAG Experiments
+# Table of Experiments
 
 [Ragas](https://docs.ragas.io) is a tool that helps you measure different aspects of your RAG pipeline and make systematic improvements. This is something we wanted ourselves, so we built it.
 
