@@ -3,3 +3,7 @@
 
 format: jb-book
 root: README
+parts:
+  - caption: RAG Experiments
+    chapters:
+      - file: RAG-Experiments/README.md
