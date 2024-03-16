@@ -1,0 +1,45 @@
+input_question,output_ground_truth
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+What are the expectations for behavior that contributes to a healthy and friendly work environment according to the 37signals Code of Conduct?,"Using courteous language, being respectful and empathetic, gracefully accepting constructive criticism and direct feedback, assuming good intentions."
+How does the concept of a presentable scope of work contribute to effective project management at 37signals?,"The concept of a presentable scope of work helps to keep projects from ballooning and provides a regular interval to decide what to work on. It helps to break big projects into smaller ones that can be completed in a specific amount of time and bundles smaller tasks into a manageable scope. This helps to avoid scope creep and ensures that work is limited by a budget, leading to more effective project management."
+What is the importance of levelheadedness in the company's values?,"Levelheadedness is important in the company's values because it promotes calm, considered, and thoughtful dealings with each other and the world at large. It discourages acting out of spite, rushing to judgment, and jumping to conclusions."
+What is the process for formal performance reviews at 37signals?,"You'll meet with your manager for formal performance reviews. When you're new to 37signals, you'll meet at the 3-month, 6-month, and 1-year marks. Then you'll meet once a year, around your anniversary with the company. Your manager will share performance expectations for your role when you start, and they'll keep you apprised of any changes to expectations should they evolve."
+What are the qualifications and responsibilities of a Senior Programmer at 37signals?,"The qualifications and responsibilities of a Senior Programmer at 37signals are as follows: 
+
+- Work doesn’t necessarily need to be reviewed, but general approach may be.
+- Fully capable of taking substantial features from concept to shipping as the sole programmer (alongside a designer).
+- Can provide material feedback on the work of junior programmers and programmers.
+- Deep expertise within at least one programming environment.
+- Basic proficiency in at least one additional programming environment.
+- Usually at least 5-8 years of experience being a professional programmer in the specific domain."
+What happens if an employee's performance does not improve within the PIP timeline?,"If an employee's performance does not improve within the PIP timeline, their manager may decide to terminate their employment with 37signals."
+What precautionary measures should be taken to safeguard company data during customs and border security checks?,"When crossing a border, it is recommended to wipe company data from your phone before traveling and restore it afterward."
+What options are available for working at a coworking space at 37signals?,37signals offers a $200/month stipend towards a desk in a coworking space. They also offer all staff an account with Deskpass if they need inspiration.
+"""What are the Support team levels and titles at 37signals, and how are they assessed?""","The Support team levels and titles at 37signals are Junior Customer Support Representative (level 1), Customer Support Representative (level 2), Senior Customer Support Representative (level 3), Lead Customer Support Representative (level 4), and Principal Customer Support Representative (level 5). They are assessed based on criteria such as experience, productivity, knowledge, problem-solving skills, customer satisfaction, and contribution to the company."
+"What are the qualifications and responsibilities of a programmer at 37signals who can handle substantial features, provide feedback, and has expertise in one programming environment?","The qualifications and responsibilities of a programmer at 37signals who can handle substantial features, provide feedback, and has expertise in one programming environment are as follows:
+
+- Works mostly on clearly defined and scoped individual features or problems.
+- Usually at least 2-5 years of experience being a professional programmer in the specific domain.
+- Fully capable of taking substantial features from concept to shipping as the sole programmer (alongside a designer).
+- Can provide material feedback on the work of junior programmers and programmers.
+- Deep expertise within at least one programming environment."
+What should you do to get a B-1 Business Visitor Visa and who should you contact?,"To get a B-1 Business Visitor Visa, you need to apply for it. You should contact Andrea as soon as you know that you'll need a visa."
+What are the designer levels and criteria at 37signals?,"The designer levels at 37signals are Junior Designer, Designer, Senior Designer, Lead Designer, and Principal Designer. The criteria for each level include the scope of work, quality of execution, years of experience, and specific skills in web and mobile design."
+How does Kandji help with security and device management at 37signals?,"Kandji helps with security and device management at 37signals by centrally managing and securing work devices, applying a standard configuration to every device, installing essential apps, ensuring the apps have the latest security updates, and allowing remote wiping of devices."
+How does Basecamp help small businesses with growth and organization?,"Basecamp helps growing companies organize their projects, internal communications, and client work in one place so they have a central source of truth. People know what to do, they know where things are, it’s clear where things stand, and everyone is accountable."
+How does 37signals handle underperforming employees?,"37signals handles underperforming employees by putting them on a Performance Improvement Plan (PIP) to address the issue. If the employee's performance does not improve, they may be terminated with a severance package."
+What documentation is needed for international travel on 37signals business and how to protect company data at border crossings?,"The documentation needed for international travel on 37signals business includes a passport, a travel visa, waiver, or electronic travel authorization, an invitation letter, and lodging address and contact info. To protect company data at border crossings, it is recommended to wipe company data from devices before crossing the border and not to bring work devices if they are not needed."
+What does Kandji apply to every device and what happens when personal and work data are mixed on a laptop?,"Kandji applies a standard configuration to every device and when personal and work data are mixed on a laptop, there are risks of destruction of personal data, difficulty in forensics or device snapshot, exposure of personal information during malware or secrets scanning, and embroilment of personal data in legal investigations."
+"""What influences have shaped the perspective that marketing is a collective responsibility at 37signals?""","The influences that have shaped the perspective that marketing is a collective responsibility at 37signals include the books 'Turn The Ship Around', 'Finding Flow', 'Punished by Rewards', and 'The Manual', as well as the people Kent Beck, Martin Fowler, Kathy Sierra, Christopher Alexander, and Bob Moesta."
+"""How can independent project teams be promoted at 37signals?""","Independent project teams can be promoted at 37signals by reducing the number of departments they have to pass through and opening up natural roadblocks. Teams should be able to go from idea to deploy as independently as possible, without needing to involve other departments unless necessary."
+What is the process for obtaining a B-1 Business Visitor Visa for a Basecamp employee?,"If your country does not participate in the Visa Waiver Program or you are not eligible for an ESTA, you’ll need to apply for a B-1 business visitor visa… the long way. We’ll work with you through this process. Start early, as soon as we have dates for a meet-up or conference. Visa appointments and processing can take weeks to months. Ping Andrea as soon as you know that you’ll need a visa."
+"""What are the qualifications and responsibilities of a Lead Programmer at 37signals, and how do they compare to a Lead Designer?""","The qualifications and responsibilities of a Lead Programmer at 37signals include being fully capable of owning and running entire subsystems of work, helping set and maintain professional standards for the entire organization, having deep, substantial expertise in multiple programming environments, and being capable of running and directing small teams for substantial projects."
