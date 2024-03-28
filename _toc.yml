@@ -10,4 +10,5 @@ parts:
     sections:
       - file: RAG-Experiments/basecamp-handbook/dataset.ipynb
       - file: RAG-Experiments/basecamp-handbook/baseline-langchain.ipynb
+      - file: RAG-Experiments/basecamp-handbook/improve-retriever-langchain.ipynb
   - file: RAG-Experiments/gitlab-handbook/README.md
